@@ -1,6 +1,6 @@
 main () {
     source .bin/env.sh
-    webpack
+    webpack --config ./compiler/webpack.config.js
 }
 
 main

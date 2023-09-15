@@ -2,15 +2,16 @@
     "version": "0.0.1",
     "configurations": [
         {
-            "name": "Debug Main Process",
+            "name": "Electron",
             "type": "node",
             "request": "launch",
+            "outputCapture": "std",
             "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
             "args": [
-                "."
-            ],
-            "outputCapture": "std"
+                ".",
+                "--disable-frame-rate-limit"
+            ]
         }
     ]
 }

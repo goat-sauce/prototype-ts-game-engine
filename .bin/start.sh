@@ -1,5 +1,5 @@
 main () {
-    electron .
+    electron .  --disable-frame-rate-limit
 }
 
 main

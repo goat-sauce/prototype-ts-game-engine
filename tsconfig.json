@@ -1,8 +1,30 @@
 {
     "compilerOptions": {
-        "outDir": "build",
+        "baseUrl": "./packages",
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "downlevelIteration": true
+        "downlevelIteration": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "paths": {
+            "@package/core": [
+                "core/index.ts"
+            ],
+            "@package/gui": [
+                "gui/index.ts"
+            ],
+            "@package/jobs": [
+                "jobs/index.ts"
+            ],
+            "@package/keyboard": [
+                "keyboard/index.ts"
+            ],
+            "@package/utils": [
+                "utils/index.ts"
+            ],
+            "@package/config": [
+                "config/index.ts"
+            ]
+        }
     }
 }
