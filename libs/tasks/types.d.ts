@@ -13,9 +13,3 @@ export type PlayerState = {
 export type HouseState = {
 
 }
-
-export type Tile = {
-    key: string
-    x: number
-    y: number
-}

@@ -2,7 +2,7 @@ import { Renderer, Ticker } from 'pixi.js'
 import { Codes, Keyboard } from '@package/keyboard'
 import { Memory } from '@package/memory'
 import { Debug } from '@package/debug'
-import { Player, Task } from '@package/tasks'
+import { Task } from '@package/tasks'
 import { Runner } from './classes/Runner'
 import { Assets } from './classes/Assets'
 import { Stage } from './classes/Stage'
@@ -10,13 +10,18 @@ import { ipcRenderer } from 'electron'
 import { IPC } from './classes/IPC'
 import { Registry } from './classes/Registry'
 import { RegisterTask, Size } from 'core/types'
-import { EventHelper, Vector2 } from '@package/helpers'
+import { EventHelper } from '@package/helpers'
 import { Atlas } from './classes/Atlas'
 import { Errors } from './Errors'
 import { config } from '@package/config'
 import { Tilemaps } from './classes/Tilemaps'
 import { Physics } from './classes/Physics'
-import { PlayerState } from 'tasks/types'
+
+const Channels = {
+    game: {
+        create: 'game:load'
+    }
+}
 
 export namespace Client {
     export enum Mode {
@@ -52,7 +57,7 @@ export namespace Client {
 
         public static async setup(): Promise<void> {
             try {
-                await ipcRenderer.invoke('game:create')
+                await ipcRenderer.invoke(Channels.game.create)
                 await Engine.assets.load()
                 await Engine.atlases.load()
                 await Engine.tilemaps.load()
@@ -96,6 +101,8 @@ export namespace Client {
 
         public static async update(): Promise<void> {
             const tasks = Engine.memory.get<Task<any>[]>('tasks')
+
+            Engine.stage.render()
             Engine.physics.world.step(1 / Engine.ticker.FPS, Engine.ticker.deltaMS, 10);
             Engine.renderer.render(Engine.stage.container)
 
@@ -112,12 +119,6 @@ export namespace Client {
             if (tasks && tasks.length > 0) {
                 Engine.memory.set<Task<any>[]>('tasks', [])
                 Engine.runner.setup(tasks)
-            }
-
-            const player = Client.Engine.registry.search<Player, PlayerState>('player')
-
-            if (player) {
-                Client.Engine.stage.center(Vector2.convert(player.task.player.body.position, true))
             }
         }
     }

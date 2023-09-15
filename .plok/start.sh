@@ -1,5 +1,5 @@
 main () {
-    npx electron .  --disable-frame-rate-limit
+    npx electron .
 }
 
 main

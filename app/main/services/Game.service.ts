@@ -7,7 +7,7 @@ export class GameService extends Service {
         FailedToSave: 'Failed to save.'
     }
 
-    public async create(): Promise<Load> {
+    public async load(): Promise<Load> {
         try {
             const save = await GameService.save()
             if (save.success) return { success: true }
@@ -22,19 +22,5 @@ export class GameService extends Service {
         return {
             success: true
         }
-        // try {
-        //     await FileHelper.mkdir(config.dir.data);
-        //     await writeFile('world.json', JSON.stringify({}))
-
-        //     return {
-        //         success: true
-        //     }
-        // } catch (error) {
-        //     Debug.logger.error(error)
-
-        //     return {
-        //         success: false
-        //     }
-        // }
     }
 }

@@ -7,7 +7,7 @@ async function start(): Promise<void> {
         const api = new API()
         await app.whenReady()
         api.window.create()
-        ipcMain.handle('game:create', api.game.create)
+        ipcMain.handle('game:load', api.game.load)
         ipcMain.handle('assets:get', api.assets.get)
         ipcMain.handle('atlas:get', api.atlas.get)
         ipcMain.handle('tilemaps:get', api.tilemaps.get)

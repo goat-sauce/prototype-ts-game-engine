@@ -6,7 +6,6 @@ export interface AtlasFrame extends ISpritesheetFrameData {
 }
 
 export interface AtlasJSON extends ISpritesheetData {
-    tilemap?: TilemapJSON
     frames: utils.Dict<ISpritesheetFrameData>
     meta: {
         image: string
@@ -27,6 +26,7 @@ export type TilemapJSON = {
     key: string
     x: number
     y: number
+    spritesheet: string
     collisions: Collision[]
 }
 

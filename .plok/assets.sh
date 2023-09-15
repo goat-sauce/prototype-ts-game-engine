@@ -1,3 +1,7 @@
-cd ../packer
-pnpm compile
-pnpm delivery
+main () {
+    cd ../packer
+    plok compile
+    plok delivery
+}
+
+main

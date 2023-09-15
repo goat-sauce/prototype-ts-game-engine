@@ -1,5 +1,5 @@
 export const config = {
-    debug: false,
+    debug: true,
     distance: 0,
     spawn: {
         size: {

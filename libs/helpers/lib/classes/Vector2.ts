@@ -31,10 +31,10 @@ export class Vector2 {
         return `${position.x.toString().replace('-', 'n')}_${position.y.toString().replace('-', 'n')}`
     }
 
-    public static convert(float32: [number, number], float?: boolean): Vector2 {
+    public static convert(float32: [number, number]): Vector2 {
         return {
-            x: float ? float32[0] : Math.floor(float32[0]),
-            y: float ? float32[1] : Math.floor(float32[1])
+            x: float32[0],
+            y: float32[1]
         }
     }
 

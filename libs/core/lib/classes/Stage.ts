@@ -1,16 +1,23 @@
 import { Client } from '../Client'
 import { Container, Graphics } from 'pixi.js'
 import { Vector2 } from '@package/helpers'
+import { Task } from '@package/tasks'
 
 export class Stage {
     public container: Container
     public pointer: Graphics
+    public target: Task<any> | null
 
     public constructor() {
         this.container = new Container()
         this.container.position = new Vector2(0, 0)
         this.container.sortableChildren = true;
         this.pointer = this.rect()
+        this.target = null
+    }
+
+    public render(): void {
+        if (this.target) this.center(this.target.position)
     }
 
     public rect(position = new Vector2(0, 0)): Graphics {
