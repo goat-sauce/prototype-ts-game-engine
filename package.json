@@ -16,7 +16,6 @@
         "forge": "bash .bin/forge.sh"
     },
     "devDependencies": {
-        "@types/electron": "^1.6.10",
         "@types/node": "^18.11.15",
         "copy-webpack-plugin": "^11.0.0",
         "electron": "^22.0.0",
@@ -26,6 +25,6 @@
         "webpack-cli": "^5.0.1"
     },
     "dependencies": {
-        "babylonjs": "^5.37.0"
+        "pixi.js": "^7.0.5"
     }
 }
