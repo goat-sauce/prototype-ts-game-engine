@@ -4,6 +4,7 @@ import { FileHelper } from '@shared/helpers'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import { AtlasJSON } from 'preload/core/types'
+import { Errors } from '../Errors'
 import { Service } from './abstract/Service'
 
 export class AtlasService extends Service {
@@ -20,7 +21,7 @@ export class AtlasService extends Service {
 
             return atlases
         } catch (error) {
-            Debug.logger.error(error)
+            Debug.logger.error(Errors.FailedAtlasService, error)
             return {}
         }
     }

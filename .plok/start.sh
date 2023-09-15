@@ -1,5 +1,9 @@
 main () {
-    npx electron .
+    plok reset
+    plok install
+    plok build
+    plok packer
+    plok watch
 }
 
 main

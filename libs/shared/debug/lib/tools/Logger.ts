@@ -2,18 +2,18 @@
 
 export const Logger = {
     normalize: (message: any): string => {
-        return message
+        return JSON.stringify(message)
     },
     log(message?: any, ...optionalParams: any[]): void {
-        console.log(Logger.normalize(message), ...Logger.normalize(optionalParams))
+        console.log(message, ...optionalParams)
     },
     info(message?: any, ...optionalParams: any[]): void {
-        console.info(Logger.normalize(message), ...Logger.normalize(optionalParams))
+        console.info(message, ...optionalParams)
     },
     warn(message?: any, ...optionalParams: any[]): void {
-        console.warn(Logger.normalize(message), ...Logger.normalize(optionalParams))
+        console.warn(message, ...optionalParams)
     },
     error(message?: any, ...optionalParams: any[]): void {
-        console.error(Logger.normalize(message), ...Logger.normalize(optionalParams))
+        console.error(message, ...optionalParams)
     }
 }

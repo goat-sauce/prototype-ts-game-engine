@@ -1,11 +1,11 @@
 all () {
-    .plok/log.sh watch all
     npx webpack --watch --config ./compiler/export.ts
+    .plok/log.sh watch all
 }
 
 specific () {
-    .plok/log.sh watch $1
     npx webpack --watch --config ./compiler/configs/$1.ts
+    .plok/log.sh watch $1
 }
 
 main () {

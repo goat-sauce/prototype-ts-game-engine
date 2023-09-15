@@ -3,7 +3,7 @@ export enum KeyBinds {
     MoveLeft = 'KeyA',
     MoveDown = 'KeyS',
     MoveRight = 'KeyD',
-    EditMode = 'F5'
+    Interact = 'Space'
 }
 
 export enum KeyBindsDebug {

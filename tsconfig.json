@@ -14,7 +14,7 @@
             "@preload/api": ["preload/api"],
             "@preload/core": ["preload/core"],
             "@preload/keyboard": ["preload/keyboard"],
-            "@preload/tasks": ["preload/tasks"],
+            "@preload/game": ["preload/game"],
             "@shared/config": ["shared/config"],
             "@shared/debug": ["shared/debug"],
             "@shared/helpers": ["shared/helpers"],

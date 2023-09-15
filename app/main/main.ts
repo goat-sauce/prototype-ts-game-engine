@@ -13,6 +13,8 @@ async function start(): Promise<void> {
         ipcMain.handle(Channels.atlas.get, api.atlas.get)
         ipcMain.handle(Channels.tilemaps.get, api.tilemaps.get)
         ipcMain.handle(Channels.audio.get, api.audio.get)
+        ipcMain.handle(Channels.conversations.get, api.conversations.get)
+        ipcMain.handle(Channels.fonts.get, api.fonts.get)
     } catch (error) {
         Debug.logger.error(error)
     }

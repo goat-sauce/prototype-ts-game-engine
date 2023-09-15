@@ -1,11 +1,11 @@
 all () {
-    .plok/log.sh build all
     npx webpack --config ./compiler/export.ts
+    .plok/log.sh build all
 }
 
 specific () {
-    .plok/log.sh build $1
     npx webpack --config ./compiler/configs/$1.ts
+    .plok/log.sh build $1
 }
 
 main () {

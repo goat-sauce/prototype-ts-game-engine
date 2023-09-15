@@ -13,5 +13,11 @@ export const Channels = {
     },
     tilemaps: {
         get: 'tilemaps:get'
+    },
+    conversations: {
+        get: 'conversations:get'
+    },
+    fonts: {
+        get: 'fonts:get'
     }
 }

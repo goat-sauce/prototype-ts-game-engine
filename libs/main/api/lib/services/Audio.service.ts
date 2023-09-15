@@ -3,6 +3,7 @@ import { Debug } from '@shared/debug'
 import { FileHelper } from '@shared/helpers'
 import { readFile } from 'fs/promises'
 import { join, parse } from 'path'
+import { Errors } from '../Errors'
 import { Service } from './abstract/Service'
 
 export class AudioService extends Service {
@@ -18,7 +19,7 @@ export class AudioService extends Service {
 
             return soundtracks
         } catch (error) {
-            Debug.logger.error(error)
+            Debug.logger.error(Errors.FailedAudioService, error)
             return {}
         }
     }

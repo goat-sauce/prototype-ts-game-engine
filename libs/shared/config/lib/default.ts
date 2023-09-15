@@ -1,12 +1,5 @@
 export const config = {
-    debug: true,
-    distance: 0,
-    spawn: {
-        size: {
-            x: 300,
-            y: 300
-        }
-    },
+    debug: false,
     dir: {
         assets: 'out'
     },

@@ -1,40 +1,38 @@
 import { Ticker } from 'pixi.js'
 import { Errors } from './Errors'
-import { GameObject } from '@preload/tasks'
 import { Codes, Keyboard } from '@preload/keyboard'
-import { RegisterGameObject } from 'preload/core/types'
-import { Memory } from '@shared/memory'
 import { Debug } from '@shared/debug'
 import { renderer } from '@shared/config'
 import { Channels } from '@shared/channels'
-import { Runner } from './classes/Runner'
-import { Stage } from './classes/Stage'
-import { IPC } from './classes/IPC'
-import { Registry } from './classes/Registry'
-import { Assets } from './classes/Assets'
-import { Physics } from './classes/Physics'
-import { Renderer } from './classes/Renderer'
+import { Layers } from './members/Layers'
+import { Physics } from './members/Physics'
+import { Assets } from './members/Assets'
+import { Registry } from './members/Registry'
+import { IPC } from './members/IPC'
+import { Runner } from './members/Runner'
+import { Renderer } from './members/Renderer'
+import { KeyBinds } from 'preload/keyboard/lib/enums/KeyBinds'
+import { Queue } from './members/Queue'
 
 export class Engine {
-    public static stage: Stage = new Stage()
+    public static layers: Layers = new Layers()
     public static renderer: Renderer = new Renderer()
     public static physics: Physics = new Physics()
     public static ticker: Ticker = new Ticker()
     public static assets: Assets = new Assets()
     public static registry: Registry = new Registry()
-    public static memory: Memory = new Memory()
     public static IPC: IPC = new IPC()
     public static runner: Runner = new Runner()
     public static keyboard: Keyboard = new Keyboard()
+    public static queue: Queue = new Queue()
     public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
     public static async setup(): Promise<void> {
         try {
-            Engine.resize()
             renderer.settings()
-            await Engine.IPC.invoke(Channels.game.load)
+            Engine.resize()
             await Engine.assets.load()
-            Engine.memory.set<GameObject<unknown>[]>('tasks', [])
+            await Engine.IPC.invoke(Channels.game.load)
             document.body.append(Engine.view)
         } catch (error) {
             Debug.logger.error(error, Errors.FailedToSetup)
@@ -49,25 +47,25 @@ export class Engine {
     }
 
     public static async render(): Promise<void> {
-        const tasks = Engine.memory.get<GameObject<any>[]>('tasks')
-
-        Engine.stage.render()
         Engine.physics.world.step(1 / Engine.ticker.FPS, Engine.ticker.deltaMS, 10)
-        Engine.renderer.render(Engine.stage.container)
+        Engine.renderer.render(Engine.layers.container)
+        Engine.layers.stage.render()
 
         if (Codes.set.size > 0) {
             Engine.keyboard.handler()
         }
 
-        if (Engine.registry.store.size > 0) {
-            Engine.runner.render([...Engine.registry.store.values()].map((registry: RegisterGameObject<any, any>): GameObject<any> => {
-                return registry.task
-            }))
+        if (Engine.queue.gameObjects.size > 0) {
+            Engine.runner.setup([...Engine.queue.gameObjects.values()])
+            Engine.queue.gameObjects = new Set()
         }
 
-        if (tasks && tasks.length > 0) {
-            Engine.memory.set<GameObject<any>[]>('tasks', [])
-            Engine.runner.setup(tasks)
+        if (Engine.registry.gameObjects.store.size > 0) {
+            Engine.runner.render([...Engine.registry.gameObjects.store.values()])
+        }
+
+        if (Physics.interaction.size > 0 && [...Codes.set].includes(KeyBinds.Interact)) {
+            Engine.runner.conductor()
         }
     }
 }

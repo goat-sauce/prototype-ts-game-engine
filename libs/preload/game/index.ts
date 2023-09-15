@@ -1,0 +1,6 @@
+export * from './lib/objects/Player.object'
+export * from './lib/objects/Npc.object'
+export * from './lib/objects/House.object'
+export * from './lib/classes/GameObject'
+export * from './lib/entities/Tilemap'
+export * from './lib/scenes/Debug.scene'
