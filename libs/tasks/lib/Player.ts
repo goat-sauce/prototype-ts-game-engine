@@ -4,7 +4,7 @@ import { Container, DisplayObject, Spritesheet } from 'pixi.js'
 import { Task } from './abstract/Task'
 
 export type PlayerState = {
-    animation: string,
+    animation: string
     position: Vector2
 }
 
@@ -22,11 +22,11 @@ export class Player extends Task<PlayerState> {
     public async render(): Promise<DisplayObject> {
         if (this.player && this.state.bag) {
             const sprite = this.player.setAnimation(this.state.bag.animation)
-            sprite.visible = true;
+            sprite.visible = true
             sprite.position = this.state.bag.position
             sprite.animationSpeed = 0.1
             sprite.play()
-            return sprite;
+            return sprite
         }
 
         return new Container()

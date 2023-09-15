@@ -76,7 +76,7 @@ export namespace Client {
                 const registry: RegisterTask<{}> | null = Client.Engine.registry.get(event.detail.ref)
 
                 if (registry) {
-                    const rendered = await registry.task.render();
+                    const rendered = await registry.task.render()
                     Client.Engine.stage.container.addChild(rendered)
                 }
             }
@@ -88,7 +88,6 @@ export namespace Client {
             Engine.view.width = size.width
             Engine.renderer.resize(size.width, size.height)
         }
-
 
         public static async update(): Promise<void> {
             const tasks = Engine.memory.get<Task<unknown>[]>('tasks')

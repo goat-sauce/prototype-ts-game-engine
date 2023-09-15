@@ -1,5 +1,5 @@
-import { contextBridge } from 'electron';
-import { GameService } from './services/Game.service';
+import { contextBridge } from 'electron'
+import { GameService } from './services/Game.service'
 
 export class API {
     public game: GameService = new GameService()

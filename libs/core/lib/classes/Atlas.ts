@@ -1,12 +1,12 @@
 import { BaseTexture, Spritesheet } from 'pixi.js'
-import { Client } from '@package/core';
-import { Debug } from '@package/debug';
-import { AtlasJSON, Loaded } from 'core/types';
-import { Errors } from '../Errors';
+import { Client } from '@package/core'
+import { Debug } from '@package/debug'
+import { AtlasJSON, Loaded } from 'core/types'
+import { Errors } from '../Errors'
 
 export class Atlas {
-    public spritesheets: Map<string, Spritesheet> = new Map();
-    public record: Record<string, AtlasJSON> = {};
+    public spritesheets: Map<string, Spritesheet> = new Map()
+    public record: Record<string, AtlasJSON> = {}
 
     public async load(): Promise<Loaded> {
         try {

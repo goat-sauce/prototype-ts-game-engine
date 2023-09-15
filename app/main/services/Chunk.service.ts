@@ -1,10 +1,10 @@
-import { config } from '@package/config';
+import { config } from '@package/config'
 import { Debug } from '@package/debug'
 import { Vector2 } from '@package/entities'
-import { IpcMainInvokeEvent } from 'electron';
-import { existsSync } from 'fs';
+import { IpcMainInvokeEvent } from 'electron'
+import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
-import { Chunk } from '../../../libs/entities/lib/Chunk';
+import { Chunk } from '../../../libs/entities/lib/Chunk'
 import { Service } from './abstract/Service'
 
 export class ChunkService extends Service {
@@ -28,7 +28,7 @@ export class ChunkService extends Service {
     }
 
     public static positions(chunk: Chunk, distance: number): Vector2[] {
-        const positions = [];
+        const positions = []
 
         for (let d = 1; d <= distance; d++) {
             const x = config.chunk.size.x * d
@@ -56,12 +56,12 @@ export class ChunkService extends Service {
             const neighbors: Record<string, Chunk> = {}
             const positions: Vector2[] = ChunkService.positions(chunk, distance)
 
-            neighbors[Vector2.key(chunk.position)] = chunk;
+            neighbors[Vector2.key(chunk.position)] = chunk
 
             for (const position of positions) {
                 const key = Vector2.key(position)
                 const exists = existsSync(`${config.dir.data}/${key}.json`)
-                let chunk: Chunk | null = null;
+                let chunk: Chunk | null = null
                 if (chunks) chunk = chunks[key]
                 if (!chunk && exists) chunk = JSON.parse(await readFile(`${config.dir.data}/${key}.json`, 'utf-8'))
                 if (chunk) neighbors[key] = chunk

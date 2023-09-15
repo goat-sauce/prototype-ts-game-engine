@@ -1,7 +1,7 @@
-import { Vector2 } from '@package/entities';
-import { Container, Sprite } from 'pixi.js';
-import { Chunk } from '../../../entities/lib/Chunk';
-import { Client } from '../Client';
+import { Vector2 } from '@package/entities'
+import { Container, Sprite } from 'pixi.js'
+import { Chunk } from '../../../entities/lib/Chunk'
+import { Client } from '../Client'
 
 export class Painter {
     public async paint(chunks: Record<string, Chunk>): Promise<void> {
@@ -9,10 +9,10 @@ export class Painter {
             const container = new Container()
 
             for (const node of Object.values(chunk.graph.nodes)) {
-                const spritesheet = Client.Engine.atlases.spritesheets.get('grass');
+                const spritesheet = Client.Engine.atlases.spritesheets.get('grass')
                 if (!spritesheet) continue
-                const sprite = new Sprite(spritesheet.textures['grass-0']);
-                const position = Vector2.normalize(node.position);
+                const sprite = new Sprite(spritesheet.textures['grass-0'])
+                const position = Vector2.normalize(node.position)
                 const offset = Vector2.normalize(chunk.position)
                 sprite.position.x = offset.x + position.x
                 sprite.position.y = offset.y + position.y

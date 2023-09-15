@@ -1,4 +1,4 @@
-import { Vector2 } from '@package/entities';
+import { Vector2 } from '@package/entities'
 
 export const config = {
     debug: false,

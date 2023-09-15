@@ -15,7 +15,7 @@ export class AtlasService extends Service {
             for (const path of paths) {
                 const file = await readFile(path, 'utf-8')
                 const json: AtlasJSON = JSON.parse(file)
-                atlases[json.meta.key] = json;
+                atlases[json.meta.key] = json
             }
 
             return atlases

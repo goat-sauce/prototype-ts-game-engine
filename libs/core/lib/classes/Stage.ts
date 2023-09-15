@@ -20,9 +20,9 @@ export class Stage {
     }
 
     public center(): Vector2 {
-        const x = Client.Engine.renderer.screen.width / 2;
-        const y = Client.Engine.renderer.screen.height / 2;
-        return new Vector2(x, y);
+        const x = Client.Engine.renderer.screen.width / 2
+        const y = Client.Engine.renderer.screen.height / 2
+        return new Vector2(x, y)
     }
 
     public debug(): void {

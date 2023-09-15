@@ -4,7 +4,7 @@ import { API } from './api'
 
 async function start(): Promise<void> {
     try {
-        const api = new API();
+        const api = new API()
         await app.whenReady()
         api.window.create()
         ipcMain.handle('game:create', api.game.create)

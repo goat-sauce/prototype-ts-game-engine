@@ -10,7 +10,7 @@ export abstract class Task<S> {
     public state: State<S> = new State(this.ref)
 
     public constructor(state: S) {
-        this.state.bag = state;
+        this.state.bag = state
     }
 
     public async render(state = this.state): Promise<DisplayObject> {

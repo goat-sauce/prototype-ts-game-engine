@@ -8,24 +8,24 @@ export class Actor {
     }
 
     public getAnimations(spritesheet: Spritesheet): Record<string, AnimatedSprite> {
-        const sprites: Record<string, AnimatedSprite> = {};
+        const sprites: Record<string, AnimatedSprite> = {}
 
         for (const [key, animation] of Object.entries(spritesheet.animations)) {
             sprites[key] = new AnimatedSprite(animation)
         }
 
-        return sprites;
+        return sprites
     }
 
     public setAnimation(key: string): AnimatedSprite {
-        const current = this.animations[key];
+        const current = this.animations[key]
 
         for (const animation of Object.values(this.animations)) {
-            animation.visible = false;
+            animation.visible = false
         }
 
-        current.visible = true;
+        current.visible = true
 
-        return current;
+        return current
     }
 }

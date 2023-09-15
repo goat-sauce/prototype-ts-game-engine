@@ -18,7 +18,7 @@ export interface AtlasJSON extends ISpritesheetData {
 export type Stage = Container
 
 export type RegisterTask<S extends {}> = {
-    task: Task<S>,
+    task: Task<S>
     render: DisplayObject
 }
 
@@ -27,6 +27,6 @@ export type Loaded = {
 }
 
 export type Size = {
-    width: number,
+    width: number
     height: number
 }
