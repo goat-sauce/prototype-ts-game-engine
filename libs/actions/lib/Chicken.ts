@@ -22,6 +22,8 @@ export class Chicken extends Action {
             position: position
         })
 
+        Client.props.push(chicken)
+
         return Client.stage.addChild(chicken.sprite)
     }
 }

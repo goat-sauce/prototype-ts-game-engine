@@ -1,6 +1,6 @@
 import { Idle } from '@package/behaviours'
 import { Helper, Vector2 } from '@package/utils'
-import { AnimatedSprite, Texture, Sprite, MIPMAP_MODES, settings, SCALE_MODES } from 'pixi.js';
+import { AnimatedSprite, Texture, Sprite, MIPMAP_MODES } from 'pixi.js';
 
 type ActorOptions = {
     position: Vector2

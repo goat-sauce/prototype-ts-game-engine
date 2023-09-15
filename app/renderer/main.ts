@@ -1,4 +1,4 @@
-export {}
+export { }
 
 declare global {
     interface Window {
@@ -8,6 +8,4 @@ declare global {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    window.client.launch()
-})
+window.client.launch()

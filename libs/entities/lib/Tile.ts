@@ -36,6 +36,7 @@ export class Node {
 
         sprite.on('mousedown', (event: FederatedPointerEvent) => {
             Client.queue.push(new Chicken({ position: this.position }))
+            console.log(Client.props)
         })
 
         return sprite

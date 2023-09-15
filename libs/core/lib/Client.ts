@@ -5,6 +5,7 @@ import { Runner } from './classes/Runner'
 import { Pool } from './classes/Pool'
 import { Stage } from 'core/types'
 import { Tween } from '@tweenjs/tween.js'
+import { Actor, Prop } from '@package/entities'
 
 export class Client {
     public static renderer: Renderer = new Renderer({
@@ -20,6 +21,10 @@ export class Client {
     public static view = Client.renderer.view
     public static queue: Action[] = []
     public static tweens: Tween<{}>[] = []
+    public static actors: Actor[] = [];
+    public static props: Prop[] = []
+    public static timer: number = 0;
+    public static frames: number = 1;
 
     public static async setup() {
         document.body.append(Client.view as unknown as HTMLCanvasElement)
@@ -29,6 +34,7 @@ export class Client {
         await Assets.load('assets/sprites/props/Chicken.png')
         await Assets.load('assets/sprites/actors/Idle1.png')
         await Assets.load('assets/sprites/actors/Idle2.png')
+        await Assets.load('assets/sprites/tiles/Grass.png')
     }
 
     public static resize() {
@@ -40,6 +46,13 @@ export class Client {
     public static state() {
         Client.renderer.render(Client.stage)
         Client.keyboard.handler(this, Keyboard.codes)
+        Client.timer += Client.ticker.deltaMS
+        Client.frames++
+
+        const timer = new Date(Client.timer);
+
+        const fps = Client.frames / (timer.getMinutes() * 60 + timer.getSeconds());
+        console.log(timer.getMinutes() * 60 + timer.getSeconds(), Client.frames, Math.floor(fps));
 
         if (Client.queue.length > 0) {
             Client.stagehand.work(Client.queue)
@@ -50,7 +63,6 @@ export class Client {
             for (const tween of Client.tweens) {
                 tween.update()
             }
-            // Client.tweens = []
         }
     }
 }
