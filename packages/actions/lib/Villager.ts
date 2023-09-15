@@ -1,4 +1,6 @@
-import { Actor, Client, Vector2 } from "@package/core";
+import { Client } from "@package/core";
+import { Vector2 } from "@package/utils";
+import { Actor } from "entities";
 import { FederatedPointerEvent } from "pixi.js";
 import { Action } from "./abstract/Action";
 
@@ -18,11 +20,6 @@ export class Villager extends Action {
             width: 18,
             height: 19
         });
-
-        villager.sprite.interactive = true;
-        villager.sprite.on('clickcapture', () => {
-            villager.sprite.destroy()
-        })
 
         return Client.stage.addChild(villager.sprite);
     }

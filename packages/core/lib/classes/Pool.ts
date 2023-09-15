@@ -1,14 +1,7 @@
-import { Container, Renderer } from 'pixi.js'
-import { Client } from './Client'
-import { Logger } from './Logger'
-import { Vector2 } from './Vector2'
-
 export class Pool {
   public workers: Worker[]
-  private logger: Logger
 
   constructor() {
-    this.logger = new Logger()
     this.workers = []
   }
 

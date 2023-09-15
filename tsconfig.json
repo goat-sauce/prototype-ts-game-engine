@@ -27,6 +27,12 @@
             ],
             "@package/memory": [
                 "memory/index.ts"
+            ],
+            "@package/entities": [
+                "entities/index.ts"
+            ],
+            "@package/debug": [
+                "debug/index.ts"
             ]
         }
     }

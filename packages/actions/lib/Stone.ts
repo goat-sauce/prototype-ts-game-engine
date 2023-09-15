@@ -1,4 +1,6 @@
-import { Client, Prop, Vector2 } from "@package/core";
+import { Client } from "@package/core";
+import { Vector2 } from "@package/utils";
+import { Prop } from "entities";
 import { Action } from "./abstract/Action";
 
 export class Stone extends Action {

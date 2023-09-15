@@ -1,13 +1,11 @@
-import { config } from '@package/config'
-import { Debug } from '@package/core'
-import { Container, Sprite, Text, Texture } from 'pixi.js'
+import { Debug } from '@package/debug'
+import { Sprite, Text, Texture } from 'pixi.js'
 
 type ButtonOptions = {
   text: string
 }
 
 export class Button {
-  n
   public sprite: Sprite
   public text: Text
 
@@ -30,9 +28,9 @@ export class Button {
     this.text.transform.position.x = this.sprite.width / 2
     this.text.transform.position.y = this.sprite.height / 2
     this.sprite.addChild(this.text)
-    this.sprite.interactive = true
-    this.sprite.on('click', () => true)
+    // this.sprite.interactive = true
+    // this.sprite.on('click', () => true)
 
-    if (config.debug) Debug.anchor(this.text)
+    Debug.Graphics.anchor(this.text)
   }
 }

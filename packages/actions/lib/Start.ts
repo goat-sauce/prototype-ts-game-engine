@@ -10,6 +10,6 @@ export class Start extends Action {
             new Button({ text: 'Quit' }).sprite
         ]
 
-        return new Stack(buttons, Client.renderer).container
+        return Client.stage.addChild(new Stack(buttons, Client.renderer).container)
     }
 }

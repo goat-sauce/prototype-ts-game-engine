@@ -1,5 +1,7 @@
 import { Villager } from '@package/actions'
 import { config } from '@package/config'
+import { Client } from '@package/core'
+import { Vector2 } from '@package/utils'
 import {
   Container,
   FederatedPointerEvent,
@@ -7,8 +9,6 @@ import {
   Sprite,
   Texture,
 } from 'pixi.js'
-import { Client } from './Client'
-import { Vector2 } from './Vector2'
 
 export class Node {
   public key: string

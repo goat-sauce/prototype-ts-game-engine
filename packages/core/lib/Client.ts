@@ -1,14 +1,18 @@
-import { Container, Renderer, Ticker } from 'pixi.js'
-import { Stagehand } from './Stagehand'
 import { Keyboard } from '@package/keyboard'
-import { Pool } from './Pool'
 import { Action } from '@package/actions'
+import { Container, Renderer, Ticker } from 'pixi.js'
+import { Runner } from './classes/Runner'
+import { Pool } from './classes/Pool'
+import { Stage } from 'core/types'
 
 export class Client {
-  public static renderer: Renderer = new Renderer({ width: 1280, height: 720 })
+  public static renderer: Renderer = new Renderer({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  })
   public static ticker: Ticker = new Ticker()
-  public static stage: Container = new Container()
-  public static stagehand: Stagehand = new Stagehand()
+  public static stage: Stage = new Container()
+  public static stagehand: Runner = new Runner()
   public static keyboard: Keyboard = new Keyboard()
   public static pool: Pool = new Pool()
   public static view = Client.renderer.view
@@ -18,11 +22,13 @@ export class Client {
     document.body.append((Client.view as unknown) as HTMLCanvasElement)
     document.addEventListener('keydown', Client.keyboard.add)
     document.addEventListener('keyup', Client.keyboard.remove)
+    window.addEventListener('resize', Client.resize)
   }
 
   public static resize() {
     Client.view.height = window.innerHeight
     Client.view.width = window.innerWidth
+    Client.renderer.resize(window.innerWidth, window.innerHeight)
   }
 
   public static state() {
