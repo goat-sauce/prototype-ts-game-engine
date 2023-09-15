@@ -34,7 +34,7 @@ export class Node {
         })
 
         sprite.on('mousedown', (event: FederatedPointerEvent) => {
-            Client.queue.push(new Villager({ event, position: this.position }))
+            Client.queue.push(new Villager({ position: this.position, event }))
         })
 
         return sprite

@@ -5,10 +5,13 @@
             "name": "Electron",
             "type": "node",
             "request": "launch",
-            "outputCapture": "std",
             "cwd": "${workspaceFolder}",
-            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
-            "args": [".", "--disable-frame-rate-limit"]
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "windows": {
+                "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+            },
+            "args": [".", "--disable-frame-rate-limit"],
+            "outputCapture": "std"
         }
     ]
 }

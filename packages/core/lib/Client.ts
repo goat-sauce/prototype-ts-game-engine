@@ -36,7 +36,6 @@ export class Client {
         Client.keyboard.handler(this, Keyboard.codes)
 
         if (Client.queue.length > 0) {
-            console.log(Client.stage)
             Client.stagehand.work(Client.queue)
             Client.queue = []
         }

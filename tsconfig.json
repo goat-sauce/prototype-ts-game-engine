@@ -15,7 +15,8 @@
             "@package/config": ["config/index.ts"],
             "@package/memory": ["memory/index.ts"],
             "@package/entities": ["entities/index.ts"],
-            "@package/debug": ["debug/index.ts"]
+            "@package/debug": ["debug/index.ts"],
+            "@package/behaviours": ["behaviours/index.ts"]
         }
     }
 }

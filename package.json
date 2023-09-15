@@ -11,6 +11,7 @@
     "scripts": {
         "start": "bash .bin/start.sh",
         "build": "bash .bin/build.sh",
+        "pretty": "bash .bin/pretty.sh",
         "watch": "bash .bin/watch.sh",
         "clean": "bash .bin/clean.sh",
         "compiler": "bash .bin/compiler.sh"
