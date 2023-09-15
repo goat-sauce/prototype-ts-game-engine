@@ -59,7 +59,7 @@ export namespace Client {
         public static async setup() {
             await ipcRenderer.invoke('game:create')
             await Engine.assets.load()
-            // await Engine.atlases.load()
+            await Engine.atlases.load()
             Engine.state.set<Task<unknown>[]>('tasks', [])
             Engine.state.set<Record<string, Chunk>>('chunks', {})
             Engine.state.set<Vector2>('activeChunkPosition', config.spawn)

@@ -1,6 +1,6 @@
 import { Vector2 } from 'entities'
 import { Task } from './abstract/Task'
-import { AnimatedSprite } from 'pixi.js'
+import { AnimatedSprite, Container } from 'pixi.js'
 import { Client } from '@package/core'
 
 export class Player extends Task<{ animation: string, position: Vector2 }> {

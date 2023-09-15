@@ -6,7 +6,7 @@ import { Service } from './abstract/Service'
 export class AssetService extends Service {
     public async get() {
         try {
-            const root = join(__dirname, 'assets')
+            const root = join(__dirname, 'out')
             return await searchDir(root, '.png', [])
         } catch (error) {
             Debug.Logger.error(error)

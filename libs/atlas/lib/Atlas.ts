@@ -1,4 +1,4 @@
-import { Spritesheet } from 'pixi.js'
+import { BaseTexture, Spritesheet } from 'pixi.js'
 import { AtlasJSON } from './interfaces/AtlasJSON';
 import { ipcRenderer } from 'electron';
 
@@ -7,6 +7,14 @@ export class Atlas {
     public list: Record<string, AtlasJSON> = {};
 
     public async load() {
-        const atlases = await ipcRenderer.invoke('atlas:get')
+        this.list = await ipcRenderer.invoke('atlas:get')
+
+        for (const [key, atlas] of Object.entries(this.list)) {
+            const spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
+            await spritesheet.parse()
+            this.spritesheets.set(key, spritesheet)
+        }
+
+        console.log(this.spritesheets, 'spritesheets')
     }
 }

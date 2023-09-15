@@ -9,6 +9,7 @@ export interface AtlasJSON extends ISpritesheetData {
     meta: {
         image: string
         scale: string
+        key: string
         related_multi_packs?: string[]
     }
 }
