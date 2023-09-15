@@ -1,4 +1,4 @@
-import { Vector2 } from '@package/entities'
+import { Vector2 } from '@package/helpers'
 import { FederatedPointerEvent } from 'pixi.js'
 
 export type TaskOptions = {

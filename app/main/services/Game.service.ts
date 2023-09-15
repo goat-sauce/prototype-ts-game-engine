@@ -1,56 +1,43 @@
-import { existsSync } from 'fs'
-import { join } from 'path'
 import { config } from '@package/config'
 import { Debug } from '@package/debug'
-import { Vector2, World } from '@package/entities'
-import { mkdir, writeFile } from 'fs/promises'
+import { writeFile } from 'fs/promises'
 import { Service } from './abstract/Service'
-import { ChunkService } from './Chunk.service'
 import { Load, Save } from '../types'
-
-const Errors = {
-    FailedToSave: 'Failed to save.'
-}
+import { FileHelper } from '@package/helpers'
 
 export class GameService extends Service {
-    public async create(): Promise<Load | null> {
+    public static Errors = {
+        FailedToSave: 'Failed to save.'
+    }
+
+    public async create(): Promise<Load> {
         try {
-            const world = new World()
-            const start = world.chunks[Vector2.key(new Vector2(config.spawn.size.x, config.spawn.size.y))]
-            const chunks = await ChunkService.neighbors(start, config.distance, world.chunks)
-            const save = await GameService.save(world)
-            if (save.success) return { chunks }
-            throw Errors.FailedToSave
+            const save = await GameService.save()
+            if (save.success) return { success: true }
+            throw GameService.Errors.FailedToSave
         } catch (error) {
             Debug.logger.error(error)
-            return null
+            return { success: false }
         }
     }
 
-    public static async save(world: World): Promise<Save> {
-        try {
-            const dirs = config.dir.data.split('/')
-            let path = ''
-
-            for (const dir of dirs) {
-                path = join(path, dir)
-                const exists = existsSync(path)
-                if (!exists) await mkdir(path)
-            }
-
-            for (const key of Object.keys(world.chunks)) {
-                await writeFile(`${config.dir.data}/${key}.json`, JSON.stringify(world.chunks[key]))
-            }
-
-            return {
-                success: true
-            }
-        } catch (error) {
-            Debug.logger.error(error)
-
-            return {
-                success: false
-            }
+    public static async save(): Promise<Save> {
+        return {
+            success: true
         }
+        // try {
+        //     await FileHelper.mkdir(config.dir.data);
+        //     await writeFile('world.json', JSON.stringify({}))
+
+        //     return {
+        //         success: true
+        //     }
+        // } catch (error) {
+        //     Debug.logger.error(error)
+
+        //     return {
+        //         success: false
+        //     }
+        // }
     }
 }

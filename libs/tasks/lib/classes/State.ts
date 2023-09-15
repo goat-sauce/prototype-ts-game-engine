@@ -16,12 +16,10 @@ export class State<S> {
         if (!this.bag) return
         this.bag = Object.assign(this.bag, state)
 
-        document.dispatchEvent(
-            new CustomEvent('state:update', {
-                detail: {
-                    ref: this.ref
-                }
-            })
-        )
+        document.dispatchEvent(new CustomEvent('state:update', {
+            detail: {
+                ref: this.ref
+            }
+        }))
     }
 }

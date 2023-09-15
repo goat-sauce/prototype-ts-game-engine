@@ -1,12 +1,12 @@
 import { AnimatedSprite, Spritesheet } from 'pixi.js'
-import { Client } from '../../core/lib/Client'
+// import { Client } from '../Client'
 
 export class Actor {
     public animations: Record<string, AnimatedSprite> = {}
 
     public constructor(spritesheet: Spritesheet) {
         this.animations = this.getAnimations(spritesheet)
-        Client.Engine.atlases.spritesheets.get('villager')
+        // Client.Engine.atlases.spritesheets.get('villager')
     }
 
     public getAnimations(spritesheet: Spritesheet): Record<string, AnimatedSprite> {

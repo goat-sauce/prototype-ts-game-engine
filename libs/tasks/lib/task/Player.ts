@@ -1,9 +1,8 @@
 import { Client } from '@package/core'
-import { Actor } from './Actor'
+import { Actor } from '../entities/Actor'
 import { Container, DisplayObject, Spritesheet } from 'pixi.js'
-import { Task } from './abstract/Task'
+import { Task } from '../abstract/Task'
 import { PlayerState } from 'tasks/types'
-import { Node, Vector2 } from '@package/entities'
 
 export class Player extends Task<PlayerState> {
     public tags: string[] = ['player']
@@ -14,8 +13,6 @@ export class Player extends Task<PlayerState> {
         super(state)
         this.spritesheet = Client.Engine.atlases.spritesheets.get('villager')
         this.player = this.spritesheet ? new Actor(this.spritesheet) : null
-        const node = new Node(new Vector2(0, 0))
-        console.log(node)
     }
 
     public async render(): Promise<DisplayObject> {

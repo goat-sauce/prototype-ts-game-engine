@@ -1,4 +1,4 @@
-import { Vector2 } from '@package/entities'
+import { Vector2 } from '@package/helpers'
 import { v4 as uuidv4 } from 'uuid'
 
 export class Node {

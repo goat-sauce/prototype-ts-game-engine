@@ -23,14 +23,10 @@ export const config = {
             y: 64
         }
     },
-    chunk: {
-        size: {
-            x: 16,
-            y: 16
-        }
-    },
     world: {
-        x: 16,
-        y: 16
+        size: {
+            x: 128,
+            y: 128
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { config } from '@package/config'
-import { Vector2 } from '@package/entities'
+import { Vector2 } from '@package/helpers'
 import { Graphics as GraphicsPIXI, Sprite } from 'pixi.js'
 
 export const Graphics = {

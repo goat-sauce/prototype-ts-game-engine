@@ -1,2 +1,3 @@
-export * from './lib/File'
-export * from './lib/Event'
+export * from './lib/classes/Vector2'
+export * from './lib/namespaces/File'
+export * from './lib/namespaces/Event'

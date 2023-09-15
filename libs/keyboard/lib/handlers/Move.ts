@@ -1,5 +1,5 @@
 import { Client } from '@package/core'
-import { Vector2 } from '@package/entities'
+import { Vector2 } from '@package/helpers';
 
 export class Move {
     private static Speed = 0.25

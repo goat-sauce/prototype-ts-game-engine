@@ -1,6 +1,6 @@
 import { Client } from '../Client'
-import { Vector2 } from '@package/entities'
 import { Container, Graphics } from 'pixi.js'
+import { Vector2 } from '@package/helpers'
 
 export class Stage {
     public container: Container

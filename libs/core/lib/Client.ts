@@ -1,19 +1,19 @@
-import { Keyboard } from '@package/keyboard'
 import { Renderer, Ticker } from 'pixi.js'
+import { Keyboard } from '@package/keyboard'
+import { Memory } from '@package/memory'
+import { Debug } from '@package/debug'
+import { Task } from '@package/tasks'
 import { Runner } from './classes/Runner'
 import { Assets } from './classes/Assets'
-import { Memory } from '@package/memory'
-import { Task } from '@package/tasks'
 import { Stage } from './classes/Stage'
 import { ipcRenderer } from 'electron'
 import { IPC } from './classes/IPC'
 import { Registry } from './classes/Registry'
 import { RegisterTask, Size } from 'core/types'
-import { Painter } from './classes/Painter'
 import { EventHelper } from '@package/helpers'
 import { Atlas } from './classes/Atlas'
-import { Debug } from '@package/debug'
 import { Errors } from './Errors'
+import { config } from '@package/config'
 
 export namespace Client {
     export enum Mode {
@@ -32,14 +32,13 @@ export namespace Client {
         public static assets: Assets = new Assets()
         public static atlases: Atlas = new Atlas()
         public static runner: Runner = new Runner()
-        public static painter: Painter = new Painter()
         public static keyboard: Keyboard = new Keyboard()
         public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
         public static size(): Size {
             return {
-                width: window.innerWidth,
-                height: window.innerHeight
+                width: config.window.size.x,
+                height: config.window.size.y
             }
         }
 

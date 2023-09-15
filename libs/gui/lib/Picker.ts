@@ -1,5 +1,5 @@
 import { Client } from '@package/core'
-import { Vector2 } from '@package/entities'
+import { Vector2 } from '@package/helpers'
 import { Resource } from 'gui/types'
 import { Container, Graphics, Text } from 'pixi.js'
 import { Panel } from './Panel'

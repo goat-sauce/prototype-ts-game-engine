@@ -16,13 +16,6 @@ export class Vector2 {
         }
     }
 
-    public static chunkize(vector: Vector2): Vector2 {
-        return {
-            x: vector.x * config.chunk.size.x,
-            y: vector.y * config.chunk.size.y
-        }
-    }
-
     public static localize(vector: Vector2): Vector2 {
         return {
             x: Math.floor(vector.x / config.base.size.x),
