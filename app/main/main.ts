@@ -1,6 +1,5 @@
 import { app, BrowserWindow } from 'electron'
 import { join } from 'path'
-import { Worker } from 'node:worker_threads'
 
 const createWindow = () => {
   const window = new BrowserWindow({
