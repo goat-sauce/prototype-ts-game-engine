@@ -2,7 +2,7 @@ import { SCALE_MODES, settings } from "pixi.js";
 
 export const config = {
     baseUnit: 32,
-    debug: true,
+    debug: false,
     renderer: () => {
         settings.SCALE_MODE = SCALE_MODES.NEAREST;
         settings.ROUND_PIXELS = true;

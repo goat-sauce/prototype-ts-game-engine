@@ -1,6 +1,6 @@
 main () {
     source .bin/env.sh
-    webpack --config ./compiler/webpack.config.js
+    webpack --config ./compiler/export.ts
 }
 
 main

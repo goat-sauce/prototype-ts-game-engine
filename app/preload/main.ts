@@ -1,16 +1,12 @@
-import * as Core from '@package/core';
-import * as Jobs from '@package/jobs';
-import { contextBridge } from 'electron';
+import { Client } from '@package/core'
+import { Floor, Villager } from '@package/actions'
+import { contextBridge } from 'electron'
 
 contextBridge.exposeInMainWorld('client', {
-    launch: () => {
-        const client = new Core.Client();
-        client.setup();
-        client.delegate([new Jobs.Start()]);
-        client.ticker.add(() => client.state())
-        client.ticker.start();
-    },
-    addEnemies: (number: number) => {
-        console.log(number, 'hello')
-    }
+  launch: async () => {
+    await Client.setup()
+    Client.stagehand.work([new Floor(), new Villager()])
+    Client.ticker.add(() => Client.state())
+    Client.ticker.start()
+  },
 })

@@ -176,11 +176,3 @@ body,
 canvas {
   display: flex;
 }
-body:after {
-  content: 'test';
-  font-family: 'pixel';
-  color: white;
-  position: absolute;
-  right: 200px;
-  top: 300px;
-}

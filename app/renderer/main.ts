@@ -1,11 +1,13 @@
-export { }
+export {}
 
 declare global {
-    interface Window {
-        client: { launch: () => void, addEnemies: (number: number) => void }
+  interface Window {
+    client: {
+      launch: () => void
     }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    window.client.launch();
-});
+  window.client.launch()
+})

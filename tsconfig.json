@@ -13,8 +13,8 @@
             "@package/gui": [
                 "gui/index.ts"
             ],
-            "@package/jobs": [
-                "jobs/index.ts"
+            "@package/actions": [
+                "actions/index.ts"
             ],
             "@package/keyboard": [
                 "keyboard/index.ts"
@@ -24,6 +24,9 @@
             ],
             "@package/config": [
                 "config/index.ts"
+            ],
+            "@package/memory": [
+                "memory/index.ts"
             ]
         }
     }
