@@ -17,6 +17,10 @@ export class GameService extends Service {
         Client.Engine.ticker.add(() => Client.Engine.update())
         Client.Engine.ticker.start()
 
+        setTimeout(() => {
+            scene.destroy()
+        }, 2000)
+
         return {
             keyboard: Client.Engine.keyboard,
             resize: Client.Engine.resize
