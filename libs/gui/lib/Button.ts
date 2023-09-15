@@ -7,10 +7,11 @@ export class Button {
     public text: Text
 
     public constructor(options: ButtonOptions) {
-        this.sprite = new Sprite(Texture.from('assets/spritesheets/gui/button/button.png', {
+        const texture = Texture.from('assets/spritesheets/gui/button/button.png', {
             width: 128,
             height: 32
-        }))
+        })
+        this.sprite = new Sprite(texture)
         this.sprite.width = 128
         this.sprite.height = 32
         this.text = new Text(options.text, { fontFamily: 'pixel', fontSize: 12 })
