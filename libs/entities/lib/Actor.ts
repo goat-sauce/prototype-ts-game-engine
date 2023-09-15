@@ -1,36 +1,11 @@
-import { Idle } from '@package/behaviours'
-import { Helper, Vector2 } from '@package/utils'
-import { AnimatedSprite, Texture, Sprite, MIPMAP_MODES } from 'pixi.js';
-
-type ActorOptions = {
-    position: Vector2
-    texture: string
-    width: number
-    height: number
-}
+import { AnimatedSprite, Spritesheet, BaseTexture } from 'pixi.js'
+import { Atlas } from './interface/Atlas'
 
 export class Actor {
-    public sprite: Sprite
-    public behaviours: { idle: Idle }
-    public animation: AnimatedSprite
+    public animation: AnimatedSprite = null
+    public spritesheet: Spritesheet
 
-    constructor(options: ActorOptions) {
-        this.sprite = Helper.sprite.create(options.texture, options)
-        this.behaviours = { idle: new Idle() }
-
-        const textures = [
-            Texture.from('assets/sprites/actors/Idle1.png', {
-                mipmap: MIPMAP_MODES.POW2,
-                width: 32,
-                height: 32
-            }),
-            Texture.from('assets/sprites/actors/Idle2.png', {
-                mipmap: MIPMAP_MODES.POW2,
-                width: 32,
-                height: 32
-            })
-        ];
-
-        this.animation = new AnimatedSprite(textures)
+    constructor(atlas: Atlas) {
+        this.spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
     }
 }

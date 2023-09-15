@@ -4,6 +4,7 @@ declare global {
     interface Window {
         client: {
             launch: () => void
+            test: () => void
         }
     }
 }

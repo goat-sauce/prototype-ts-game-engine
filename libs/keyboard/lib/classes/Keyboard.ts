@@ -13,7 +13,7 @@ export class Keyboard {
         Keyboard.codes.delete(event.code as KeyBinds)
     }
 
-    public handler(client: Client, codes: Set<KeyBinds>) {
+    public handler(client: Client.Engine, codes: Set<KeyBinds>) {
         for (const code of codes.values()) {
             switch (code) {
                 case KeyBinds.MoveUp:

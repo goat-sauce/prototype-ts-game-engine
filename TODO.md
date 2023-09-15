@@ -1,3 +1,13 @@
+Goals 2023
+
+-   Release first game on Steam.
+-   Average 20 viewers on Twitch.
+
+    -   Be consistent, pick a time, stream similar hours?
+
+-   Lose excess weight.
+-   Maintain job.
+
 Expand on client Asset Load function, implement a proper asset loader.
 
 Current goal

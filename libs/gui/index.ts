@@ -1,3 +1,5 @@
 export * from './lib/Icon'
 export * from './lib/Stack'
+export * from './lib/Panel'
 export * from './lib/Button'
+export * from './lib/Picker'

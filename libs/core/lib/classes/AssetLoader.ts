@@ -1,16 +1,15 @@
-import { Assets } from "pixi.js"
+import { Assets } from 'pixi.js'
 
 export class AssetLoader {
     private static assets = [
-        'assets/sprites/props/Chicken.png',
-        'assets/sprites/actors/Idle1.png',
-        'assets/sprites/actors/Idle2.png',
-        'assets/sprites/tiles/Grass.png'
+        'assets/sprites/props/farm/base.png',
+        'assets/sprites/actors/villager/base.png',
+        'assets/sprites/tiles/base/Grass.png'
     ]
 
     public static async load() {
         for (const asset of AssetLoader.assets) {
-            await Assets.load(asset);
+            await Assets.load(asset)
         }
     }
 }

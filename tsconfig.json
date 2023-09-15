@@ -9,7 +9,7 @@
         "paths": {
             "@package/core": ["core/index.ts"],
             "@package/gui": ["gui/index.ts"],
-            "@package/actions": ["actions/index.ts"],
+            "@package/tasks": ["tasks/index.ts"],
             "@package/keyboard": ["keyboard/index.ts"],
             "@package/utils": ["utils/index.ts"],
             "@package/config": ["config/index.ts"],

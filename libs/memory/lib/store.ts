@@ -1,16 +1,17 @@
 export class Memory {
-    public static store: Map<string, unknown> = new Map();
+    public static store: Map<string, unknown> = new Map()
 
-    public get<T>(key: string): Map<string, T> {
-        return Memory.store.get(key) as Map<string, T>;
+    public get<T>(key: string): T | null {
+        if (!Memory.store.get(key)) return null
+        return Memory.store.get(key) as T
     }
 
-    public set(key: string, value: string): void {
-        if (this.get(key)) throw 'Exists'
-        Memory.store[key] = value
+    public set<T>(key: string, value: T): T {
+        Memory.store.set(key, value)
+        return Memory.store.get(key) as T
     }
 
     public delete(key: string): void {
-        delete Memory.store[key]
+        Memory.store.delete(key)
     }
 }

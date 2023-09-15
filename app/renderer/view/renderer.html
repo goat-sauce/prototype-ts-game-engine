@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:" />
+        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' data: blob:" />
+        <title>Game</title>
+        <link rel="preload" as="style" href="renderer.css" />
+        <link rel="stylesheet" href="renderer.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:" />
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' data: blob:" />
-    <title>Game</title>
-    <link rel="preload" as="style" href="renderer.css" />
-    <link rel="stylesheet" href="renderer.css" />
-</head>
-
-<body>
-    <script src="./renderer.bundle.js"></script>
-</body>
-
+    <body>
+        <script src="./renderer.bundle.js"></script>
+    </body>
 </html>

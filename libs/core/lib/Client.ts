@@ -1,63 +1,86 @@
 import { Keyboard } from '@package/keyboard'
-import { Action } from '@package/actions'
-import { Assets, Container, Renderer, Ticker } from 'pixi.js'
+import { Container, Renderer, Ticker } from 'pixi.js'
 import { Runner } from './classes/Runner'
 import { Pool } from './classes/Pool'
 import { Stage } from 'core/types'
-import { Tween } from '@tweenjs/tween.js'
-import { Actor, Prop } from '@package/entities'
 import { AssetLoader } from './classes/AssetLoader'
+import { Memory } from '@package/memory'
+import { Task } from '@package/tasks'
+import { Chunk } from '../../../app/main/classes/Chunk'
+import { Vector2 } from '@package/utils'
+import { Chunks } from './classes/Chunks'
 
-export class Client {
-    public static renderer: Renderer = new Renderer({
-        width: window.innerWidth,
-        height: window.innerHeight,
-    })
-    public static ticker: Ticker = new Ticker()
-    public static stage: Stage = new Container()
-    public static stagehand: Runner = new Runner()
-    public static keyboard: Keyboard = new Keyboard()
-    public static pool: Pool = new Pool()
-    public static view = Client.renderer.view
-    public static queue: Action[] = []
-    public static tweens: Tween<{}>[] = []
-    public static actors: Actor[] = [];
-    public static props: Prop[] = []
-    public static timer: number = 0;
-    public static frames: number = 1;
-
-    public static async setup() {
-        document.body.append(Client.view as unknown as HTMLCanvasElement)
-        document.addEventListener('keydown', Client.keyboard.add)
-        document.addEventListener('keyup', Client.keyboard.remove)
-        window.addEventListener('resize', Client.resize)
-        await AssetLoader.load();
+export namespace Client {
+    export enum Mode {
+        Play = 'play',
+        Placement = 'placement',
+        Overlay = 'overlay'
     }
 
-    public static resize() {
-        Client.view.height = window.innerHeight
-        Client.view.width = window.innerWidth
-        Client.renderer.resize(window.innerWidth, window.innerHeight)
-    }
+    export class Engine {
+        public static renderer: Renderer = new Renderer(Engine.size())
+        public static ticker: Ticker = new Ticker()
+        public static stage: Stage = new Container()
+        public static runner: Runner = new Runner()
+        public static keyboard: Keyboard = new Keyboard()
+        public static pool: Pool = new Pool()
+        public static state: Memory = new Memory()
+        public static mode: Mode = Mode.Play
+        public static chunks: Chunks = new Chunks()
+        // public static graph: Graph = new Graph(new Vector2(256, 256))
+        public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
-    public static state() {
-        Client.renderer.render(Client.stage)
-        Client.keyboard.handler(this, Keyboard.codes)
-        Client.timer += Client.ticker.deltaMS
-        Client.frames++
-
-        const timer = new Date(Client.timer);
-        const fps = Math.floor(Client.frames / (timer.getMinutes() * 60 + timer.getSeconds()));
-
-        if (Client.queue.length > 0) {
-            Client.stagehand.work(Client.queue)
-            Client.queue = []
+        public static size() {
+            return {
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
         }
 
-        if (Client.tweens.length > 0) {
-            for (const tween of Client.tweens) {
-                tween.update()
-            }
+        public static async setup() {
+            document.body.append(Engine.view)
+            Engine.eventListeners()
+            Engine.stage.position.x = Engine.renderer.screen.x / 2
+            Engine.stage.position.y = Engine.renderer.screen.y / 2
+            await AssetLoader.load()
+            Engine.state.set<Task[]>('tasks', [])
+            Engine.state.set<Chunk[]>('chunks', [])
+            Engine.state.set<number>('timer', Engine.ticker.deltaMS)
+            Engine.state.set<number>('frame', 0)
+        }
+
+        private static eventListeners() {
+            document.addEventListener('keydown', Engine.keyboard.add)
+            document.addEventListener('keyup', Engine.keyboard.remove)
+            window.addEventListener('resize', Engine.resize)
+        }
+
+        public static resize() {
+            const size = Engine.size()
+            Engine.view.height = size.height
+            Engine.view.width = size.width
+            Engine.renderer.resize(size.width, size.height)
+        }
+
+        public static fps() {
+            const timer = Engine.state.get<number>('timer')
+            const frame = Engine.state.get<number>('frame')
+
+            Engine.state.set('timer', timer + Engine.ticker.deltaMS)
+            Engine.state.set('frame', frame + 1)
+
+            return Math.floor(frame / new Date(timer).getSeconds())
+        }
+
+        public static update() {
+            const tasks = Engine.state.get<Task[]>('tasks')
+            const chunks = Engine.state.get<Chunk[]>('chunks')
+            Engine.state.set<Task[]>('tasks', [])
+            Engine.state.set<Chunk[]>('chunks', [])
+            Engine.renderer.render(Engine.stage)
+            Engine.keyboard.handler(this, Keyboard.codes)
+            if (tasks.length > 0) Engine.runner.work(tasks)
+            if (chunks.length > 0) Engine.runner.load(chunks)
         }
     }
 }

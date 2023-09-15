@@ -1,0 +1,4 @@
+{
+    "idle": ["base-0", "base-4"],
+    "spin": ["base-0", "base-1", "base-2", "base-3"]
+}

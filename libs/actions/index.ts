@@ -1,5 +1,0 @@
-export * from './lib/Floor'
-export * from './lib/Stone'
-export * from './lib/Villager'
-export * from './lib/Start'
-export * from './lib/abstract/Action'

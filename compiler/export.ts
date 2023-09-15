@@ -6,9 +6,9 @@ import { assets } from './assets'
 import { workers } from './workers'
 
 export default [
+    { ...base, ...assets },
     { ...base, ...main },
     { ...base, ...renderer },
     { ...base, ...preload },
-    { ...base, ...assets },
     { ...base, ...workers }
 ]
