@@ -1,3 +1,3 @@
-import { API } from './api'
+import { API } from '@preload/api'
 
 API.expose(new API())

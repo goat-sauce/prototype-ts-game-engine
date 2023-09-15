@@ -10,15 +10,16 @@
         "strict": true,
         "downlevelIteration": true,
         "paths": {
-            "@package/entities": ["entities/index.ts"],
-            "@package/core": ["core/index.ts"],
-            "@package/gui": ["gui/index.ts"],
-            "@package/tasks": ["tasks/index.ts"],
-            "@package/keyboard": ["keyboard/index.ts"],
-            "@package/config": ["config/index.ts"],
-            "@package/memory": ["memory/index.ts"],
-            "@package/debug": ["debug/index.ts"],
-            "@package/helpers": ["helpers/index.ts"]
+            "@main/api": ["main/api"],
+            "@preload/api": ["preload/api"],
+            "@preload/core": ["preload/core"],
+            "@preload/keyboard": ["preload/keyboard"],
+            "@preload/tasks": ["preload/tasks"],
+            "@shared/config": ["shared/config"],
+            "@shared/debug": ["shared/debug"],
+            "@shared/helpers": ["shared/helpers"],
+            "@shared/memory": ["shared/memory"],
+            "@shared/channels": ["shared/channels"]
         }
     }
 }

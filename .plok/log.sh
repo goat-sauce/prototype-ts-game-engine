@@ -7,7 +7,7 @@ main () {
 
   if (($# > ${#colors[@]}))
   then
-    source .plok/error.sh "$# args passed. Ran out of colors. Only ${#colors[@]} available."
+    .plok/error.sh "$# args passed. Ran out of colors. Only ${#colors[@]} available."
     exit 2
   fi
 
