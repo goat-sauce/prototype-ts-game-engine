@@ -27,7 +27,6 @@ export class Physics {
     public beginContact(event: BeginContactEvent): void {
         const interactingGameObjects = this.getInteractingGameObjects(event)
         const key = this.getInteractingGameObjectsKey(event)
-        console.log(interactingGameObjects, 'setting')
         if (interactingGameObjects) Physics.interaction.set(key, interactingGameObjects)
     }
 

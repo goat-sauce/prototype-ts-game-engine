@@ -8,7 +8,6 @@ import { Service } from './abstract/Service'
 export class SpritesheetsService extends Service {
     public async get(): Promise<string[]> {
         try {
-            console.log('service', await FileHelper.search(join(__dirname, config.dir.assets), '.png', []))
             return await FileHelper.search(join(__dirname, config.dir.assets), '.png', [])
         } catch (error) {
             Debug.logger.error(Errors.FailedSpritesheetService, error)
