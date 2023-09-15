@@ -2,8 +2,6 @@
 
 // // conversations
 
-
-
 // "faldyr-1" = [
 //     ""
 // ]
@@ -14,9 +12,4 @@
 
 // // Change game mode (Dialogue mode or something)
 
-
-
-
-export class Dialogue {
-
-}
+export class Dialogue {}

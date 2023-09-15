@@ -7,7 +7,7 @@ export type GameObjectOptions = {
 }
 
 export type ZoneOptions = {
-    ref?: string,
+    ref?: string
     position?: Vector2
     radius: number
 }
@@ -36,14 +36,14 @@ export type PlayerState = {
 
 export type NpcState = {
     spawn: Vector2
-    animation: 'idle',
+    animation: 'idle'
     running: boolean
 }
 
 export type HouseState = {}
 
 export type DialogBoxState = {
-    conversation: string[],
+    conversation: string[]
     index: number
 }
 

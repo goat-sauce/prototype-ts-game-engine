@@ -11,8 +11,8 @@ export class StartMenu extends GameObject<StartMenuState> {
 
     public constructor(state: StartMenuState) {
         super(state)
-        const width = 400;
-        const height = 400;
+        const width = 400
+        const height = 400
 
         this.items = ['Start', 'Settings', 'Exit']
         this.padding = 15
@@ -28,7 +28,7 @@ export class StartMenu extends GameObject<StartMenuState> {
             const text = new Text(item, {
                 fontFamily: 'rainyhearts',
                 fontSize: '26px',
-                fill: 0xFFFFFF,
+                fill: 0xffffff,
                 align: 'center'
             })
             text.resolution = 2
@@ -38,11 +38,11 @@ export class StartMenu extends GameObject<StartMenuState> {
             text.interactive = true
 
             text.on('mouseenter', () => {
-                text.style.fill = 0xFF00FF
+                text.style.fill = 0xff00ff
             })
 
             text.on('mouseleave', () => {
-                text.style.fill = 0xFFFFFF
+                text.style.fill = 0xffffff
             })
 
             this.graphics.addChild(text)

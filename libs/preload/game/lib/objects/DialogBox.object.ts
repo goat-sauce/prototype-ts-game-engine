@@ -15,7 +15,7 @@ export class DialogBox extends GameObject<DialogBoxState> {
 
         this.container = new Container()
 
-        this.text = new Text(this.state.bag.conversation[this.state.bag.index]);
+        this.text = new Text(this.state.bag.conversation[this.state.bag.index])
 
         this.text.style = new TextStyle({
             fontFamily: 'retro',
@@ -27,7 +27,7 @@ export class DialogBox extends GameObject<DialogBoxState> {
         const padding = 50
 
         const getDimension = (min: number, value: number, padding: number): number => {
-            const calc = value + (padding * 2)
+            const calc = value + padding * 2
             if (calc >= min) return calc
             return min
         }

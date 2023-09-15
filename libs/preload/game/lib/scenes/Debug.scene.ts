@@ -6,9 +6,9 @@ import { Npc } from '../objects/Npc.object'
 import { Player } from '../objects/Player.object'
 
 type DebugSceneGameObjects = {
-    house: House,
-    player: Player,
-    npc: Npc,
+    house: House
+    player: Player
+    npc: Npc
     dialogBox: DialogBox
 }
 
@@ -17,7 +17,6 @@ export class DebugScene extends Scene {
 
     public constructor() {
         super()
-
 
         this.gameObjects = {
             house: new House({}),
