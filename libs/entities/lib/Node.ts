@@ -5,7 +5,7 @@ export class Node {
     public ref: string = uuidv4()
     public position: Vector2
 
-    constructor(position: Vector2) {
+    public constructor(position: Vector2) {
         this.position = position
     }
 }

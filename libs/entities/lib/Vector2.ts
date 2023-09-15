@@ -4,37 +4,37 @@ export class Vector2 {
     public x: number
     public y: number
 
-    constructor(x: number, y: number) {
+    public constructor(x: number, y: number) {
         this.x = x
         this.y = y
     }
 
-    public static normalize(x: number, y: number) {
+    public static normalize(vector: Vector2): Vector2 {
         return {
-            x: x * config.base.size.x,
-            y: y * config.base.size.y
+            x: vector.x * config.base.size.x,
+            y: vector.y * config.base.size.y
         }
     }
 
-    public static chunkize(x: number, y: number) {
+    public static chunkize(vector: Vector2): Vector2 {
         return {
-            x: x * config.chunk.size.x,
-            y: y * config.chunk.size.y
+            x: vector.x * config.chunk.size.x,
+            y: vector.y * config.chunk.size.y
         }
     }
 
-    public static localize(x: number, y: number) {
+    public static localize(vector: Vector2): Vector2 {
         return {
-            x: Math.floor(x / config.base.size.x),
-            y: Math.floor(y / config.base.size.y)
+            x: Math.floor(vector.x / config.base.size.x),
+            y: Math.floor(vector.y / config.base.size.y)
         }
     }
 
-    public static equal(a: Vector2, b: Vector2) {
+    public static equal(a: Vector2, b: Vector2): boolean {
         return a.x === b.x && a.y === b.y
     }
 
-    public static key(position: Vector2) {
+    public static key(position: Vector2): string {
         return `${position.x.toString().replace('-', 'n')}_${position.y.toString().replace('-', 'n')}`
     }
 }

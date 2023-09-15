@@ -3,7 +3,7 @@ main () {
         rm -r build
     fi
 
-    source bash .plok/log.sh build clean
+    source .plok/log.sh build clean
 }
 
 main

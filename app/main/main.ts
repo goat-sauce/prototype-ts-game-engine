@@ -2,7 +2,7 @@ import { Debug } from '@package/debug'
 import { app, ipcMain } from 'electron'
 import { API } from './api'
 
-async function start() {
+async function start(): Promise<void> {
     try {
         const api = new API();
         await app.whenReady()
@@ -12,7 +12,7 @@ async function start() {
         ipcMain.handle('atlas:get', api.atlas.get)
         ipcMain.handle('chunk:get', api.chunk.get)
     } catch (error) {
-        Debug.Logger.error(error)
+        Debug.logger.error(error)
     }
 }
 

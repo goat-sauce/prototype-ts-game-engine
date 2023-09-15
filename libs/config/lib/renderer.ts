@@ -1,7 +1,7 @@
-import { SCALE_MODES, settings } from "pixi.js"
+import { SCALE_MODES, settings } from 'pixi.js'
 
 export const renderer = {
-    settings: () => {
+    settings: (): void => {
         settings.SCALE_MODE = SCALE_MODES.NEAREST
         settings.ROUND_PIXELS = true
         settings.ANISOTROPIC_LEVEL = 0

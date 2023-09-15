@@ -3,7 +3,7 @@
         "baseUrl": "./libs",
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        // "strict": true,
+        "strict": true,
         "downlevelIteration": true,
         "inlineSourceMap": true,
         "inlineSources": true,
@@ -16,8 +16,7 @@
             "@package/memory": ["memory/index.ts"],
             "@package/entities": ["entities/index.ts"],
             "@package/debug": ["debug/index.ts"],
-            "@package/utils": ["utils/index.ts"],
-            "@package/atlas": ["atlas/index.ts"]
+            "@package/helpers": ["helpers/index.ts"]
         }
     }
 }

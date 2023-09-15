@@ -1,37 +1,25 @@
-export class State<S extends {}> {
-    public obj: S
+export class State<S> {
+    public bag: S | null = null;
     public ref: string;
 
-    constructor(ref: string) {
+    public constructor(ref: string) {
         this.ref = ref;
     }
 
-    public get(key: keyof S) {
-        return this.obj[key]
+    public get(key: keyof S): S[keyof S] | null {
+        if (!this.bag) return null;
+        const value = this.bag[key];
+        return value ? value : null;
     }
 
-    private changed(state: Partial<S>) {
-        let changed = false;
+    public set(state: Partial<S>): void {
+        if (!this.bag) return;
+        this.bag = Object.assign(this.bag, state)
 
-        for (const key of Object.keys(state)) {
-            if (this.obj[key] !== state[key]) {
-                changed = true
+        document.dispatchEvent(new CustomEvent('state:update', {
+            detail: {
+                ref: this.ref
             }
-        }
-        return changed;
-    }
-
-    public set(state: Partial<S>) {
-        if (this.changed(state)) {
-            this.obj = { ...this.obj, ...state }
-
-            const event = new CustomEvent('state:update', {
-                detail: {
-                    ref: this.ref
-                }
-            });
-
-            document.dispatchEvent(event)
-        }
+        }))
     }
 }

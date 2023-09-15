@@ -5,7 +5,7 @@ import { Container, Graphics } from 'pixi.js'
 export class Panel {
     public container: Container = new Container()
 
-    constructor() {
+    public constructor() {
         const panel = this.rect(new Vector2(Client.Engine.renderer.screen.width - 128, Client.Engine.renderer.screen.height - 128))
         const close = this.rect(new Vector2(32, 32))
         close.interactive = true
@@ -18,7 +18,7 @@ export class Panel {
         this.container.addChild(panel, close)
     }
 
-    rect(position: Vector2) {
+    public rect(position: Vector2): Graphics {
         const graphics = new Graphics()
         graphics.beginFill(0xffff00)
         graphics.lineStyle(1, 0xff0000)

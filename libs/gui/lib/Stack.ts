@@ -3,13 +3,13 @@ import { Container, Renderer, Sprite } from 'pixi.js'
 export class Stack {
     public container: Container<Sprite>
 
-    constructor(displayObjects: Sprite[], renderer: Renderer) {
+    public constructor(displayObjects: Sprite[], renderer: Renderer) {
         this.container = new Container<Sprite>()
         this.container.addChild(...displayObjects)
         this.position(renderer)
     }
 
-    public position(renderer: Renderer) {
+    public position(renderer: Renderer): void {
         const padding = 16
         let position = 0
 

@@ -7,7 +7,7 @@ const config = {
     entry: './app/preload/main.ts',
     output: {
         filename: 'preload.bundle.js',
-        path: resolve(__dirname, getBuildRoot(process.env.COMPILER_BUILD_DEPTH))
+        path: resolve(__dirname, getBuildRoot())
     }
 }
 

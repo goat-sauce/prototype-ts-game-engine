@@ -1,15 +1,15 @@
-import { AtlasJSON } from '@package/atlas'
+import { config } from '@package/config'
 import { Debug } from '@package/debug'
-import { searchDir } from '@package/utils'
+import { FileHelper } from '@package/helpers'
+import { AtlasJSON } from 'core/types'
 import { readFile } from 'fs/promises'
 import { join } from 'path'
 import { Service } from './abstract/Service'
 
 export class AtlasService extends Service {
-    public async get() {
+    public async get(): Promise<Record<string, AtlasJSON>> {
         try {
-            const root = join(__dirname, 'out')
-            const paths = await searchDir(root, 'atlas.json', [])
+            const paths = await FileHelper.search(join(__dirname, config.dir.assets), 'atlas.json', [])
             const atlases: Record<string, AtlasJSON> = {}
 
             for (const path of paths) {
@@ -20,7 +20,8 @@ export class AtlasService extends Service {
 
             return atlases
         } catch (error) {
-            Debug.Logger.error(error)
+            Debug.logger.error(error)
+            return {}
         }
     }
 }

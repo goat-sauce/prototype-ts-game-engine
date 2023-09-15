@@ -8,18 +8,15 @@ const config = {
     entry: './app/renderer/main.ts',
     output: {
         filename: 'renderer.bundle.js',
-        path: resolve(__dirname, getBuildRoot(process.env.COMPILER_BUILD_DEPTH))
+        path: resolve(__dirname, getBuildRoot())
     },
     plugins: [
         new CopyPlugin({
-            patterns: [
-                {
-                    from: 'app/renderer/view/renderer.html'
-                },
-                {
-                    from: 'app/renderer/view/renderer.css'
+            patterns: ['css', 'html'].map((ext: string) => {
+                return {
+                    from: `app/renderer/view/renderer.${ext}`
                 }
-            ]
+            })
         })
     ]
 }

@@ -1,14 +1,13 @@
+import { config } from '@package/config'
 import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { Service } from './abstract/Service'
 
 export class WindowService extends Service {
-    public create() {
+    public create(): void {
         const window = new BrowserWindow({
-            width: 1280,
-            height: 720,
-            minHeight: 360,
-            minWidth: 640,
+            width: config.window.size.x,
+            height: config.window.size.y,
             useContentSize: true,
             autoHideMenuBar: true,
             webPreferences: {

@@ -9,27 +9,26 @@ export abstract class Task<S> {
     public tags: string[] = ['default']
     public state: State<S> = new State(this.ref)
 
-    constructor(state: S) {
-        this.state.obj = state;
+    public constructor(state: S) {
+        this.state.bag = state;
     }
 
     public async render(state = this.state): Promise<DisplayObject> {
-        Debug.Logger.log({ status: 'rendered' })
+        Debug.logger.log({ status: 'rendered', state })
         return new Container()
     }
 
-    public async inject(object: DisplayObject) {
-        // Debug.Logger.log({ status: 'injected', object })
+    public async inject(object: DisplayObject): Promise<void> {
         Client.Engine.stage.container.addChild(object)
     }
 
-    public register(task: Task<S>, rendered?: DisplayObject) {
-        Client.Engine.registry.set(task.ref, { task, rendered })
-        Debug.Logger.log({ status: 'registered', ref: this.ref, tags: this.tags })
+    public register(task: Task<S>, render: DisplayObject): void {
+        Client.Engine.registry.set(task.ref, { task, render })
+        Debug.logger.log({ status: 'registered', ref: this.ref, tags: this.tags })
     }
 
-    public destroy() {
+    public destroy(): void {
         Client.Engine.registry.delete(this.ref)
-        Debug.Logger.log({ status: 'destroyed', ref: this.ref, tags: this.tags })
+        Debug.logger.log({ status: 'destroyed', ref: this.ref, tags: this.tags })
     }
 }

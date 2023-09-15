@@ -5,15 +5,15 @@ export class Keyboard {
     public move: Move = new Move()
     public static codes: Set<KeyBinds> = new Set()
 
-    public add(event: KeyboardEvent) {
+    public add(event: KeyboardEvent): void {
         Keyboard.codes.add(event.code as KeyBinds)
     }
 
-    public remove(event: KeyboardEvent) {
+    public remove(event: KeyboardEvent): void {
         Keyboard.codes.delete(event.code as KeyBinds)
     }
 
-    public handler(codes: Set<KeyBinds>) {
+    public handler(codes: Set<KeyBinds>): void {
         for (const code of codes.values()) {
             switch (code) {
                 case KeyBinds.MoveUp:
@@ -28,8 +28,6 @@ export class Keyboard {
                 case KeyBinds.MoveRight:
                     this.move.right()
                     break
-                default:
-                    console.log('end')
             }
         }
     }

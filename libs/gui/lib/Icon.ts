@@ -1,4 +1,4 @@
-import { Container, ITextStyle, Resource, settings, Sprite, Text, Texture } from 'pixi.js'
+import { Container, ITextStyle, Resource, Sprite, Text, Texture } from 'pixi.js'
 
 type IconOptions = { filename: string }
 
@@ -7,7 +7,7 @@ export class Icon {
     public sprite: Sprite
     public text: Text
 
-    constructor(options: IconOptions) {
+    public constructor(options: IconOptions) {
         this.container = new Container()
         this.sprite = new Sprite(Texture.from(options.filename, this.getTexture()))
         this.text = new Text('0', this.getText())
