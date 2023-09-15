@@ -1,10 +1,9 @@
-import * as Core from "@package/core";
-import { Client } from "@package/core";
-import { Job } from "./abstract/Job";
+import { Client, Prop, Vector2 } from "@package/core";
+import { Action } from "./abstract/Action";
 
-export class Stone extends Job {
+export class Stone extends Action {
     public override complete() {
-        const stone = new Core.Prop({ position: new Core.Vector2(3, 3) });
+        const stone = new Prop({ position: new Vector2(3, 3) });
         return Client.stage.addChild(stone.sprite);
     }
 }

@@ -1,10 +1,10 @@
 import { Actor, Client, Vector2 } from "@package/core";
 import { FederatedPointerEvent } from "pixi.js";
-import { Job } from "./abstract/Job";
+import { Action } from "./abstract/Action";
 
 type VillagerOptions = { position: Vector2, event: FederatedPointerEvent };
 
-export class Villager extends Job {
+export class Villager extends Action {
     public options: VillagerOptions;
 
     constructor(options?: VillagerOptions) {

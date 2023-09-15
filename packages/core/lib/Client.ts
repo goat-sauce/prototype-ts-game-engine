@@ -1,11 +1,8 @@
 import { Container, Renderer, Ticker } from 'pixi.js'
 import { Stagehand } from './Stagehand'
 import { Keyboard } from '@package/keyboard'
-import { config } from '@package/config'
-import { Job } from '@package/actions'
 import { Pool } from './Pool'
-
-config.renderer()
+import { Action } from '@package/actions'
 
 export class Client {
   public static renderer: Renderer = new Renderer({ width: 1280, height: 720 })
@@ -15,7 +12,7 @@ export class Client {
   public static keyboard: Keyboard = new Keyboard()
   public static pool: Pool = new Pool()
   public static view = Client.renderer.view
-  public static queue: Job[] = []
+  public static queue: Action[] = []
 
   public static async setup() {
     document.body.append((Client.view as unknown) as HTMLCanvasElement)

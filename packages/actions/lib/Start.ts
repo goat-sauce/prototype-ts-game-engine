@@ -1,8 +1,8 @@
 import { Client } from '@package/core';
 import { Button, Stack } from '@package/gui';
-import { Job } from "./abstract/Job";
+import { Action } from './abstract/Action';
 
-export class Start extends Job {
+export class Start extends Action {
     public override complete() {
         const buttons = [
             new Button({ text: 'Start' }).sprite,
