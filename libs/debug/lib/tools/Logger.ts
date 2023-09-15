@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 export const Logger = {
     normalize: (message: any): string => {
         return JSON.parse(JSON.stringify(message))
