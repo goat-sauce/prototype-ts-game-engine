@@ -7,7 +7,7 @@ export type TaskOptions = {
 
 export type PlayerState = {
     animation: string
-    position: Vector2
+    spawn: Vector2
 }
 
 export type HouseState = {

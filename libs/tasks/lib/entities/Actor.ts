@@ -14,10 +14,10 @@ export class Actor {
         this.animations = new Animations(this.spritesheet, spawn)
         this.physics = new Physics(this.animations.active, {
             body: {
-                mass: 0.1,
+                mass: 1,
                 fixedRotation: true,
                 gravityScale: 0,
-                damping: 0,
+                damping: 0.6,
                 position: Vector2.float32(Vector2.normalize(spawn))
             },
             box: {

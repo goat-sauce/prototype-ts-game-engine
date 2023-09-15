@@ -1,7 +1,6 @@
 import { renderer } from '@package/config'
 import { Client } from '@package/core'
-import { Vector2 } from '@package/helpers'
-import { House, Npc, Player } from '@package/tasks'
+import { DebugScene } from 'tasks/lib/scenes/Debug.scene'
 import { Launch } from '../types'
 import { Service } from './abstract/Service'
 
@@ -10,12 +9,11 @@ export class GameService extends Service {
         renderer.settings()
         await Client.Engine.setup()
 
-        const player = new Player({ animation: 'idle', position: new Vector2(0, 0) });
-        const npc = new Npc({ animation: 'idle', position: new Vector2(0, 1) })
-        const house = new House({})
+        const scene = new DebugScene()
 
-        Client.Engine.stage.target = player
-        Client.Engine.runner.setup([house, npc, player])
+        Client.Engine.stage.center(scene.tasks.player.position)
+        Client.Engine.stage.target = scene.tasks.player
+        Client.Engine.runner.setup([...Object.values(scene.tasks)])
         Client.Engine.ticker.add(() => Client.Engine.update())
         Client.Engine.ticker.start()
 

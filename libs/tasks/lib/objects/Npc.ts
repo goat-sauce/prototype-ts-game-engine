@@ -5,7 +5,7 @@ import { PlayerState } from 'tasks/types'
 import { Vector2 } from '@package/helpers'
 
 export class Npc extends Task<PlayerState> {
-    public actor: Actor = new Actor('villager', new Vector2(3, 0))
+    public actor: Actor = new Actor('villager', this.state.bag.spawn)
 
     public async render(): Promise<DisplayObject> {
         this.actor.animations.set(this.state.bag.animation)

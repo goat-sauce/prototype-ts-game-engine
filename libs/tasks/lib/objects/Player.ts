@@ -6,7 +6,7 @@ import { Vector2 } from '@package/helpers'
 
 export class Player extends Task<PlayerState> {
     public tags: string[] = ['player']
-    public actor: Actor = new Actor('villager', new Vector2(0, 0))
+    public actor: Actor = new Actor('villager', this.state.bag.spawn)
 
     public async render(): Promise<DisplayObject> {
         this.actor.animations.set(this.state.bag.animation)
