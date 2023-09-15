@@ -13,7 +13,6 @@
         "build": "bash .bin/build.sh",
         "watch": "bash .bin/watch.sh",
         "clean": "bash .bin/clean.sh",
-        "forge": "bash .bin/forge.sh",
         "compiler": "bash .bin/compiler.sh"
     },
     "devDependencies": {

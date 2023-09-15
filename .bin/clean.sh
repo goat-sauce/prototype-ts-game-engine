@@ -1,5 +1,7 @@
 main () {
-    rm -r build
+    if [ -d "build" ]; then
+        rm -r build
+    fi
 }
 
 main
