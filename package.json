@@ -15,6 +15,7 @@
         "pretty": "bash .plok/pretty.sh",
         "watch": "bash .plok/watch.sh",
         "clean": "bash .plok/clean.sh",
+        "lint": "bash .plok/lint.sh",
         "reset": "bash .plok/reset.sh"
     },
     "devDependencies": {
