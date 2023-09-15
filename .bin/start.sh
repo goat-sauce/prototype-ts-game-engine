@@ -1,0 +1,5 @@
+main () {
+    electron .
+}
+
+main
