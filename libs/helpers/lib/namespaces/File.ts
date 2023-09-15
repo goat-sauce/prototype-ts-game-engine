@@ -14,11 +14,8 @@ export namespace FileHelper {
                 const exists = existsSync(route)
                 if (!exists) await mkdir(route)
             }
-
-            return;
         } catch (error) {
             Debug.logger.info(error)
-            return;
         }
     }
 
