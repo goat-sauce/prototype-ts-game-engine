@@ -2,53 +2,26 @@ import { Client } from '@package/core'
 import { Vector2 } from '@package/helpers'
 
 export class Move {
-    private static Speed = 0.25
+    public speed = 0.25
+    public up(): void { this.handle('up') }
+    public down(): void { this.handle('down') }
+    public left(): void { this.handle('left') }
+    public right(): void { this.handle('right') }
 
-    public up(): void {
-        const player = Client.Engine.registry.search<{ animation: string; position: Vector2 }>('player')
-        const delta = Client.Engine.ticker.deltaMS
-
-        if (player && player.render) {
-            player.task.state.set({
-                animation: 'up',
-                position: new Vector2(player.render.position.x, (player.render.position.y -= Move.Speed * delta))
-            })
-        }
+    public calculate: Record<string, (position: Vector2) => Vector2> = {
+        up: (position: Vector2) => new Vector2(position.x, (position.y -= this.speed * Client.Engine.ticker.deltaMS)),
+        down: (position: Vector2) => new Vector2(position.x, (position.y += this.speed * Client.Engine.ticker.deltaMS)),
+        left: (position: Vector2) => new Vector2((position.x -= this.speed * Client.Engine.ticker.deltaMS), position.y),
+        right: (position: Vector2) => new Vector2((position.x += this.speed * Client.Engine.ticker.deltaMS), position.y)
     }
 
-    public down(): void {
+    public handle(animation: string): void {
         const player = Client.Engine.registry.search<{ animation: string; position: Vector2 }>('player')
-        const delta = Client.Engine.ticker.deltaMS
 
         if (player && player.render) {
-            player.task.state.set({
-                animation: 'down',
-                position: new Vector2(player.render.position.x, (player.render.position.y += Move.Speed * delta))
-            })
-        }
-    }
-
-    public left(): void {
-        const player = Client.Engine.registry.search<{ animation: string; position: Vector2 }>('player')
-        const delta = Client.Engine.ticker.deltaMS
-
-        if (player && player.render) {
-            player.task.state.set({
-                animation: 'left',
-                position: new Vector2((player.render.position.x -= Move.Speed * delta), player.render.position.y)
-            })
-        }
-    }
-
-    public right(): void {
-        const player = Client.Engine.registry.search<{ animation: string; position: Vector2 }>('player')
-        const delta = Client.Engine.ticker.deltaMS
-
-        if (player && player.render) {
-            player.task.state.set({
-                animation: 'right',
-                position: new Vector2((player.render.position.x += Move.Speed * delta), player.render.position.y)
-            })
+            const position = this.calculate[animation](player.render.position)
+            player.task.state.set({ animation, position })
+            Client.Engine.stage.center(new Vector2(-position.x, -position.y))
         }
     }
 }

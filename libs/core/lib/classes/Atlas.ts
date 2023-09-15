@@ -3,10 +3,11 @@ import { Client } from '@package/core'
 import { Debug } from '@package/debug'
 import { AtlasJSON, Loaded } from 'core/types'
 import { Errors } from '../Errors'
+import { DefaultMap } from '@package/helpers'
 
 export class Atlas {
-    public spritesheets: Map<string, Spritesheet> = new Map()
-    public record: Record<string, AtlasJSON> = {}
+    public spritesheet: Spritesheet = new Spritesheet(new BaseTexture(), { frames: {}, meta: { scale: '1' } })
+    public spritesheets: DefaultMap<Spritesheet> = new DefaultMap<Spritesheet>(this.spritesheet)
 
     public async load(): Promise<Loaded> {
         try {

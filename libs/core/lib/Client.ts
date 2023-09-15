@@ -1,5 +1,5 @@
 import { Renderer, Ticker } from 'pixi.js'
-import { Keyboard } from '@package/keyboard'
+import { Codes, Keyboard } from '@package/keyboard'
 import { Memory } from '@package/memory'
 import { Debug } from '@package/debug'
 import { Task } from '@package/tasks'
@@ -14,12 +14,16 @@ import { EventHelper } from '@package/helpers'
 import { Atlas } from './classes/Atlas'
 import { Errors } from './Errors'
 import { config } from '@package/config'
+import { Tilemaps } from './classes/Tilemaps'
 
 export namespace Client {
     export enum Mode {
         Play = 'play',
-        Placement = 'placement',
-        Overlay = 'overlay'
+        Debug = 'debug'
+    }
+
+    export const mode: { current: Mode } = {
+        current: Mode.Play
     }
 
     export class Engine {
@@ -33,6 +37,7 @@ export namespace Client {
         public static atlases: Atlas = new Atlas()
         public static runner: Runner = new Runner()
         public static keyboard: Keyboard = new Keyboard()
+        public static tilemaps: Tilemaps = new Tilemaps()
         public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
         public static size(): Size {
@@ -47,9 +52,9 @@ export namespace Client {
                 await ipcRenderer.invoke('game:create')
                 await Engine.assets.load()
                 await Engine.atlases.load()
+                await Engine.tilemaps.load()
                 Engine.memorize()
                 Engine.eventListeners()
-                Engine.stage.debug()
                 Engine.start()
             } catch (error) {
                 Debug.logger.error(error, Errors.FailedToSetup)
@@ -65,8 +70,6 @@ export namespace Client {
         }
 
         private static eventListeners(): void {
-            document.addEventListener('keydown', Engine.keyboard.add)
-            document.addEventListener('keyup', Engine.keyboard.remove)
             document.addEventListener('state:update', Engine.state)
         }
 
@@ -93,8 +96,8 @@ export namespace Client {
 
             Engine.renderer.render(Engine.stage.container)
 
-            if (Keyboard.codes.size > 0) {
-                Engine.keyboard.handler(Keyboard.codes)
+            if (Codes.set.size > 0) {
+                Engine.keyboard.handler()
             }
 
             if (tasks && tasks.length > 0) {

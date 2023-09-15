@@ -3,12 +3,11 @@ export const config = {
     distance: 0,
     spawn: {
         size: {
-            x: 0,
-            y: 0
+            x: 300,
+            y: 300
         }
     },
     dir: {
-        data: 'build/data',
         assets: 'out'
     },
     window: {

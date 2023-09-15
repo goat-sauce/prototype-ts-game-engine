@@ -6,13 +6,20 @@ export interface AtlasFrame extends ISpritesheetFrameData {
 }
 
 export interface AtlasJSON extends ISpritesheetData {
+    tilemap?: TilemapJSON
     frames: utils.Dict<ISpritesheetFrameData>
     meta: {
         image: string
-        scale: string
         key: string
+        scale: string
         related_multi_packs?: string[]
     }
+}
+
+type TilemapJSON = {
+    key: string
+    x: number
+    y: number
 }
 
 export type Stage = Container

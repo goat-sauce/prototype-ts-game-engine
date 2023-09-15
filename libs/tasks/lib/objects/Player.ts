@@ -1,18 +1,17 @@
-import { Client } from '@package/core'
 import { Actor } from '../entities/Actor'
-import { Container, DisplayObject, Spritesheet } from 'pixi.js'
+import { Container, DisplayObject } from 'pixi.js'
 import { Task } from '../abstract/Task'
 import { PlayerState } from 'tasks/types'
+import { Client } from '@package/core'
 
 export class Player extends Task<PlayerState> {
     public tags: string[] = ['player']
     public player: Actor | null
-    public spritesheet: Spritesheet | undefined
 
     public constructor(state: PlayerState) {
         super(state)
-        this.spritesheet = Client.Engine.atlases.spritesheets.get('villager')
-        this.player = this.spritesheet ? new Actor(this.spritesheet) : null
+        this.player = new Actor('villager')
+        Client.Engine.stage.center(state.position)
     }
 
     public async render(): Promise<DisplayObject> {
@@ -21,6 +20,7 @@ export class Player extends Task<PlayerState> {
             sprite.visible = true
             sprite.position = this.state.bag.position
             sprite.animationSpeed = 0.1
+            sprite.anchor.set(0.5)
             sprite.play()
             return sprite
         }

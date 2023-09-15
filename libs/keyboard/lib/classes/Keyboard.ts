@@ -1,34 +1,21 @@
-import { KeyBinds } from '../enums/KeyBinds'
-import { Move } from '../handlers/Move'
+import { Client } from '@package/core'
+import { Mapper } from './Mapper'
+import { Codes } from './Codes'
+import { KeyBinds, KeyBindsDebug } from '../enums/KeyBinds'
 
 export class Keyboard {
-    public move: Move = new Move()
-    public static codes: Set<KeyBinds> = new Set()
+    public codes: Codes = new Codes()
+    public mapper: Mapper = new Mapper()
 
-    public add(event: KeyboardEvent): void {
-        Keyboard.codes.add(event.code as KeyBinds)
-    }
-
-    public remove(event: KeyboardEvent): void {
-        Keyboard.codes.delete(event.code as KeyBinds)
-    }
-
-    public handler(codes: Set<KeyBinds>): void {
-        for (const code of codes.values()) {
-            switch (code) {
-                case KeyBinds.MoveUp:
-                    this.move.up()
+    public handler = (): void => {
+        for (const code of Codes.set.values())
+            switch (Client.mode.current) {
+                case Client.Mode.Play:
+                    this.mapper.play(code as KeyBinds)
                     break
-                case KeyBinds.MoveDown:
-                    this.move.down()
-                    break
-                case KeyBinds.MoveLeft:
-                    this.move.left()
-                    break
-                case KeyBinds.MoveRight:
-                    this.move.right()
+                case Client.Mode.Debug:
+                    this.mapper.debug(code as KeyBindsDebug)
                     break
             }
-        }
     }
 }

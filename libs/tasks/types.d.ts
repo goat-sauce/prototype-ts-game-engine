@@ -9,3 +9,13 @@ export type PlayerState = {
     animation: string
     position: Vector2
 }
+
+export type HouseState = {
+
+}
+
+export type Tile = {
+    key: string
+    x: number
+    y: number
+}

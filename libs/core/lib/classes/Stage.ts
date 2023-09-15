@@ -19,14 +19,8 @@ export class Stage {
         return graphics
     }
 
-    public center(): Vector2 {
-        const x = Client.Engine.renderer.screen.width / 2
-        const y = Client.Engine.renderer.screen.height / 2
-        return new Vector2(x, y)
-    }
-
-    public debug(): void {
-        this.pointer.position = this.center()
-        Client.Engine.stage.container.addChild(this.pointer)
+    public center(position: Vector2): void {
+        this.container.position.x = position.x + Client.Engine.renderer.screen.width / 2
+        this.container.position.y = position.y + Client.Engine.renderer.screen.height / 2
     }
 }
