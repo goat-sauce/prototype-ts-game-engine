@@ -1,11 +1,11 @@
-import { AnimatedSprite, Spritesheet, BaseTexture } from 'pixi.js'
-import { Atlas } from './interface/Atlas'
+import { Client } from '@package/core'
+import { Spritesheet } from 'pixi.js'
 
 export class Actor {
-    public animation: AnimatedSprite = null
-    public spritesheet: Spritesheet
+    // public spritesheet: Spritesheet
 
-    constructor(atlas: Atlas) {
-        this.spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
+    constructor(key: string) {
+        // this is causing a bug when turned on, not sure why? 
+        // this.spritesheet = Client.Engine.atlases.spritesheets.get(key)
     }
 }

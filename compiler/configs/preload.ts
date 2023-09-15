@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-import { getRoot } from '../utils'
+import { getBuildRoot } from '../utils'
 import { base } from './base'
 
 const config = {
@@ -7,7 +7,7 @@ const config = {
     entry: './app/preload/main.ts',
     output: {
         filename: 'preload.bundle.js',
-        path: resolve(__dirname, getRoot(process.env.BUILD_DEPTH))
+        path: resolve(__dirname, getBuildRoot(process.env.COMPILER_BUILD_DEPTH))
     }
 }
 

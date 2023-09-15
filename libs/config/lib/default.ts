@@ -1,19 +1,26 @@
-import { SCALE_MODES, settings } from 'pixi.js'
+import { Vector2 } from "@package/entities";
 
 export const config = {
-    baseUnit: 64,
     debug: false,
-    distance: 1,
+    distance: 0,
+    spawn: new Vector2(0, 0),
+    dir: {
+        data: 'build/data'
+    },
+    base: {
+        size: {
+            x: 64,
+            y: 64
+        }
+    },
     chunk: {
-        size: 8
+        size: {
+            x: 16,
+            y: 16
+        }
     },
     world: {
-        size: 256
-    },
-    renderer: () => {
-        settings.SCALE_MODE = SCALE_MODES.NEAREST
-        settings.ROUND_PIXELS = true
-        settings.ANISOTROPIC_LEVEL = 0
-        settings.RESOLUTION = 1
+        x: 16,
+        y: 16
     }
 }

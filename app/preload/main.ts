@@ -1,21 +1,20 @@
 import { Client } from '@package/core'
-import { Floor, GameOverlay, Villager } from '@package/tasks'
-import { contextBridge, ipcRenderer } from 'electron'
-import { config } from '@package/config'
-import { Chunk } from '../main/classes/Chunk'
-
-config.renderer()
+import { contextBridge } from 'electron'
+import { renderer } from '@package/config'
+import { Player } from 'tasks/lib/Player'
+import { Vector2 } from '@package/entities'
 
 contextBridge.exposeInMainWorld('client', {
     launch: async () => {
+        renderer.settings()
         await Client.Engine.setup()
-        Client.Engine.runner.work([new Floor(), new Villager(), new GameOverlay()])
+        Client.Engine.runner.work([new Player({ animation: 'idle', position: new Vector2(0, 0) })])
         Client.Engine.ticker.add(() => Client.Engine.update())
         Client.Engine.ticker.start()
-        const test: Chunk[] = await ipcRenderer.invoke('test', { test: true })
-    },
-    test: async () => {
-        const test = await ipcRenderer.invoke('test', { test: true })
-        console.log(test, 'test')
+
+        return {
+            keyboard: Client.Engine.keyboard,
+            resize: Client.Engine.resize
+        }
     }
 })

@@ -1,4 +1,5 @@
 import { config } from '@package/config'
+import { Vector2 } from '@package/entities'
 import { Graphics as GraphicsPIXI, Sprite } from 'pixi.js'
 
 export namespace Debug {
@@ -11,16 +12,35 @@ export namespace Debug {
             graphics.drawRect(sprite.anchor.x - 1, sprite.anchor.y - 1, 1, 1)
             sprite.addChild(graphics)
         }
+
+        public static rect(position = new Vector2(0, 0)) {
+            const graphics = new GraphicsPIXI()
+            graphics.beginFill(0xffff00)
+            graphics.lineStyle(10, 0xff0000)
+            graphics.drawRect(position.x, position.y, 1, 1)
+            return graphics
+        }
     }
+
     export class Logger {
+        static normalize(message: any) {
+            return JSON.parse(JSON.stringify(message))
+        }
+
         static log(message?: any, ...optionalParams: any[]) {
-            console.log(JSON.parse(JSON.stringify(message)), ...optionalParams)
+            console.log(Logger.normalize(message), ...Logger.normalize(optionalParams))
         }
-        static warning(message?: any, ...optionalParams: any[]) {
-            console.warn(JSON.parse(JSON.stringify(message)), ...optionalParams)
+
+        static info(message?: any, ...optionalParams: any[]) {
+            console.info(Logger.normalize(message), ...Logger.normalize(optionalParams))
         }
+
+        static warn(message?: any, ...optionalParams: any[]) {
+            console.warn(Logger.normalize(message), ...Logger.normalize(optionalParams))
+        }
+
         static error(message?: any, ...optionalParams: any[]) {
-            console.error(JSON.parse(JSON.stringify(message)), ...optionalParams)
+            console.error(Logger.normalize(message), ...Logger.normalize(optionalParams))
         }
     }
 }

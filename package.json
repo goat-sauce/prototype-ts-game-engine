@@ -1,7 +1,7 @@
 {
     "name": "test",
     "version": "1.0.0",
-    "description": "",
+    "description": "game",
     "main": "build/main.bundle.js",
     "author": "cdboiuk",
     "license": "UNLICENSED",
@@ -9,18 +9,22 @@
         "node": "16.17.1"
     },
     "scripts": {
-        "start": "bash .bin/start.sh",
-        "build": "bash .bin/build.sh",
-        "pretty": "bash .bin/pretty.sh",
-        "watch": "bash .bin/watch.sh",
-        "clean": "bash .bin/clean.sh",
-        "compiler": "bash .bin/compiler.sh",
-        "pack": "bash .bin/pack.sh"
+        "start": "bash .plok/start.sh",
+        "build": "bash .plok/build.sh",
+        "pretty": "bash .plok/pretty.sh",
+        "watch": "bash .plok/watch.sh",
+        "clean": "bash .plok/clean.sh",
+        "reset": "bash .plok/reset.sh"
     },
     "devDependencies": {
         "@types/node": "^18.11.15",
+        "@types/uuid": "^9.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.47.1",
+        "@typescript-eslint/parser": "^5.47.1",
         "copy-webpack-plugin": "^11.0.0",
         "electron": "^22.0.0",
+        "eslint": "^8.31.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
         "ts-loader": "^9.4.2",
         "ts-node": "^10.9.1",
         "tsconfig-paths-webpack-plugin": "^4.0.0",
@@ -29,8 +33,7 @@
         "webpack-cli": "^5.0.1"
     },
     "dependencies": {
-        "@tweenjs/tween.js": "^18.6.4",
         "pixi.js": "^7.0.5",
-        "uuidv4": "^6.2.13"
+        "uuid": "^9.0.0"
     }
 }

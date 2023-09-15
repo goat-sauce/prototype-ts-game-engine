@@ -1,8 +1,8 @@
-import { Client } from '@package/core'
 import { KeyBinds } from '../enums/KeyBinds'
-import { Move } from '../handlers/move'
+import { Move } from '../handlers/Move'
 
 export class Keyboard {
+    public move: Move = new Move()
     public static codes: Set<KeyBinds> = new Set()
 
     public add(event: KeyboardEvent) {
@@ -13,21 +13,23 @@ export class Keyboard {
         Keyboard.codes.delete(event.code as KeyBinds)
     }
 
-    public handler(client: Client.Engine, codes: Set<KeyBinds>) {
+    public handler(codes: Set<KeyBinds>) {
         for (const code of codes.values()) {
             switch (code) {
                 case KeyBinds.MoveUp:
-                    Move.up(client)
+                    this.move.up()
                     break
                 case KeyBinds.MoveDown:
-                    Move.down(client)
+                    this.move.down()
                     break
                 case KeyBinds.MoveLeft:
-                    Move.left(client)
+                    this.move.left()
                     break
                 case KeyBinds.MoveRight:
-                    Move.right(client)
+                    this.move.right()
                     break
+                default:
+                    console.log('end')
             }
         }
     }

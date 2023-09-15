@@ -1,5 +1,5 @@
 import { FederatedPointerEvent } from 'pixi.js'
 
-type TaskOptions = {
+export type TaskOptions = {
     event?: FederatedPointerEvent | null
 }

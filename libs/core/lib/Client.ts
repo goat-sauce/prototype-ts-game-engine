@@ -1,30 +1,52 @@
 import { Keyboard } from '@package/keyboard'
-import { Container, Renderer, Ticker } from 'pixi.js'
-import { Runner } from './classes/Runner'
+import { DisplayObject, Renderer, Ticker } from 'pixi.js'
+import { Painter, Runner } from './classes/Runner'
 import { Pool } from './classes/Pool'
-import { Stage } from 'core/types'
-import { Assets } from './classes/AssetLoader'
+import { Assets } from './classes/Assets'
 import { Memory } from '@package/memory'
 import { Task } from '@package/tasks'
 import { Chunk } from '../../../app/main/classes/Chunk'
+import { Vector2 } from '@package/entities'
+import { Stage } from './classes/Stage'
+import { ipcRenderer } from 'electron'
+import { config } from '@package/config'
+import { Atlas } from '@package/atlas'
+
+export type RegisterTask<S extends {}> = {
+    task: Task<S>,
+    rendered: DisplayObject
+}
+
+class Registry extends Memory {
+    public override store: Map<string, RegisterTask<any>> = new Map()
+
+    public search<S extends {}>(tag: string): RegisterTask<S> {
+        return Array.from(this.store.values()).find((register: RegisterTask<S>) => {
+            if (register.task.tags.includes(tag)) return register;
+        })
+    }
+}
+
 
 export namespace Client {
-    export enum Mode {
-        Play = 'play',
-        Placement = 'placement',
-        Overlay = 'overlay'
+    export const Mode = {
+        Play: 'play',
+        Placement: 'placement',
+        Overlay: 'overlay'
     }
 
     export class Engine {
         public static renderer: Renderer = new Renderer(Engine.size())
         public static ticker: Ticker = new Ticker()
-        public static stage: Stage = new Container()
+        public static stage: Stage = new Stage()
         public static runner: Runner = new Runner()
+        public static painter: Painter = new Painter()
         public static keyboard: Keyboard = new Keyboard()
         public static pool: Pool = new Pool()
         public static assets: Assets = new Assets()
+        public static atlases: Atlas = new Atlas()
         public static state: Memory = new Memory()
-        public static mode: Mode = Mode.Play
+        public static registry: Registry = new Registry()
         public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
         public static size() {
@@ -35,8 +57,16 @@ export namespace Client {
         }
 
         public static async setup() {
-            Engine.load()
+            await ipcRenderer.invoke('game:create')
+            await Engine.assets.load()
+            // await Engine.atlases.load()
+            Engine.state.set<Task<unknown>[]>('tasks', [])
+            Engine.state.set<Record<string, Chunk>>('chunks', {})
+            Engine.state.set<Vector2>('activeChunkPosition', config.spawn)
+            Engine.state.set<number>('timer', Engine.ticker.deltaMS)
+            Engine.state.set<number>('frame', 0)
             Engine.eventListeners()
+            Engine.stage.debug()
             Engine.start()
         }
 
@@ -44,18 +74,33 @@ export namespace Client {
             document.body.append(Engine.view)
         }
 
-        public static load() {
-            Engine.assets.load()
-            Engine.state.set<Task[]>('tasks', [])
-            Engine.state.set<Chunk[]>('chunks', [])
-            Engine.state.set<number>('timer', Engine.ticker.deltaMS)
-            Engine.state.set<number>('frame', 0)
+        public static async chunk(event: CustomEvent<{ position: boolean }>) {
+            const chunks = await ipcRenderer.invoke('chunk:get', { position: event.detail.position })
+            Engine.state.set('activeChunkPosition', event.detail.position)
+            Engine.state.set<Record<string, Chunk>>('chunks', chunks)
+        }
+
+        private static isCustomEvent(event: Event): event is CustomEvent {
+            return 'detail' in event;
         }
 
         private static eventListeners() {
             document.addEventListener('keydown', Engine.keyboard.add)
             document.addEventListener('keyup', Engine.keyboard.remove)
-            window.addEventListener('resize', Engine.resize)
+            document.addEventListener('chunk:update', Engine.chunk)
+            document.addEventListener('state:update', Engine.stateUpdate)
+            // window.addEventListener('resize', Engine.resize)
+        }
+
+        public static async stateUpdate(event: Event) {
+            if (Client.Engine.isCustomEvent(event)) {
+                const registry: RegisterTask<{}> | null = Client.Engine.registry.get(event.detail.ref)
+
+                if (registry) {
+                    const rendered = await registry.task.render();
+                    Client.Engine.stage.container.addChild(rendered)
+                }
+            }
         }
 
         public static resize() {
@@ -68,20 +113,25 @@ export namespace Client {
         public static fps() {
             const timer = Engine.state.get<number>('timer')
             const frame = Engine.state.get<number>('frame')
-            Engine.state.set('timer', timer + Engine.ticker.deltaMS)
-            Engine.state.set('frame', frame + 1)
-            return Math.floor(frame / new Date(timer).getSeconds())
+            if (timer) Engine.state.set('timer', timer + Engine.ticker.deltaMS)
+            if (frame) Engine.state.set('frame', frame + 1)
+            if (timer && frame) return Math.floor(frame / new Date(timer).getSeconds())
+            return null;
         }
 
-        public static update() {
-            const tasks = Engine.state.get<Task[]>('tasks')
-            const chunks = Engine.state.get<Chunk[]>('chunks')
-            Engine.state.set<Task[]>('tasks', [])
-            Engine.state.set<Chunk[]>('chunks', [])
-            Engine.renderer.render(Engine.stage)
-            Engine.keyboard.handler(this, Keyboard.codes)
-            if (tasks.length > 0) Engine.runner.work(tasks)
-            if (chunks.length > 0) Engine.runner.load(chunks)
+        public static async update() {
+            const tasks = Engine.state.get<Task<unknown>[]>('tasks')
+
+            Engine.renderer.render(Engine.stage.container)
+
+            if (Keyboard.codes.size > 0) {
+                Engine.keyboard.handler(Keyboard.codes)
+            }
+
+            if (tasks.length > 0) {
+                Engine.state.set<Task<unknown>[]>('tasks', [])
+                Engine.runner.work(tasks)
+            }
         }
     }
 }

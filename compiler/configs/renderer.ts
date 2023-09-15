@@ -1,6 +1,6 @@
 import CopyPlugin from 'copy-webpack-plugin'
 import { resolve } from 'path'
-import { getRoot } from '../utils'
+import { getBuildRoot } from '../utils'
 import { base } from './base'
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
     entry: './app/renderer/main.ts',
     output: {
         filename: 'renderer.bundle.js',
-        path: resolve(__dirname, getRoot(process.env.BUILD_DEPTH))
+        path: resolve(__dirname, getBuildRoot(process.env.COMPILER_BUILD_DEPTH))
     },
     plugins: [
         new CopyPlugin({

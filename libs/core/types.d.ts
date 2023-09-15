@@ -1,3 +1,3 @@
 import { Container } from 'pixi.js'
 
-type Stage = Container
+export type Stage = Container

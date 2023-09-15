@@ -1,13 +1,11 @@
 import { Vector2 } from '@package/entities'
+import { v4 as uuidv4 } from 'uuid'
 
 export class Node {
-    public key: string
+    public ref: string = uuidv4()
     public position: Vector2
-    public filename: string
 
-    constructor(key: string, position: Vector2, filename: string) {
-        this.key = key
+    constructor(position: Vector2) {
         this.position = position
-        this.filename = filename
     }
 }

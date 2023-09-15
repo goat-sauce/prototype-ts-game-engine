@@ -1,1 +1,1 @@
-export * from './lib/JSON'
+export * from './lib/searchDir'

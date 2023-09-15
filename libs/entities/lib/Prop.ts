@@ -1,12 +1,9 @@
-import { Spritesheet, BaseTexture, Sprite } from 'pixi.js'
-import { Atlas } from './interface/Atlas'
+import { Spritesheet, BaseTexture } from 'pixi.js'
 
 export class Prop {
     public spritesheet: Spritesheet
-    public sprite: Sprite
 
-    constructor(atlas: Atlas) {
-        this.spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
-        this.sprite = new Sprite()
+    constructor() {
+        // this.spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
     }
 }

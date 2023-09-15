@@ -1,11 +1,13 @@
-import { Assets } from "./crud/Assets";
-import { Chunks } from "./crud/Chunks";
-import { Game } from "./crud/Game";
-import { Window } from "./crud/Window";
+import { AssetService } from './services/Asset.service'
+import { AtlasService } from './services/Atlas.service'
+import { ChunkService } from './services/Chunk.service'
+import { GameService } from './services/Game.service'
+import { WindowService } from './services/Window.service'
 
-export const api: API = {
-    game: new Game(),
-    window: new Window(),
-    assets: new Assets(),
-    chunks: new Chunks()
-};
+export class API {
+    public game: GameService = new GameService()
+    public window: WindowService = new WindowService()
+    public assets: AssetService = new AssetService()
+    public chunk: ChunkService = new ChunkService()
+    public atlas: AtlasService = new AtlasService()
+}

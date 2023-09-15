@@ -1,28 +1,22 @@
 import { Vector2 } from '@package/entities'
 import { Node } from './Node'
 
-export class Chunk {
+export class Graph {
     private size: Vector2
-    public nodes: Map<string, Node>
+    public nodes: Record<string, Node>
 
     constructor(size: Vector2) {
         this.size = size
         this.nodes = this.generate()
     }
 
-    public key(position: Vector2) {
-        return `${position.x}|${position.y}`
-    }
-
     private generate() {
-        const nodes = new Map()
+        const nodes = {}
 
         for (let x = 0; x < this.size.x; x++) {
             for (let y = 0; y < this.size.y; y++) {
                 const position = new Vector2(x, y)
-                const key = this.key(position)
-                const node = new Node(key, position, 'assets/spritesheets/tiles/base/Grass.png')
-                nodes.set(key, node)
+                nodes[Vector2.key(position)] = new Node(position)
             }
         }
 

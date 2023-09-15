@@ -11,12 +11,11 @@ export class Button {
 
     constructor(buttonOptions: ButtonOptions) {
         this.sprite = new Sprite(
-            Texture.from('assets/spritesheets/gui/button.png', {
+            Texture.from('assets/spritesheets/gui/button/button.png', {
                 width: 128,
                 height: 32
             })
         )
-
         this.sprite.width = 128
         this.sprite.height = 32
         this.text = new Text(buttonOptions.text, {
@@ -28,9 +27,6 @@ export class Button {
         this.text.transform.position.x = this.sprite.width / 2
         this.text.transform.position.y = this.sprite.height / 2
         this.sprite.addChild(this.text)
-        // this.sprite.interactive = true
-        // this.sprite.on('click', () => true)
-
         Debug.Graphics.anchor(this.text)
     }
 }

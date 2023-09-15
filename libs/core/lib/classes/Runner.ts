@@ -1,40 +1,36 @@
-import { config } from '@package/config'
-import { Debug } from '@package/debug'
+import { Atlas } from '@package/atlas'
+import { Vector2 } from '@package/entities'
 import { Task } from '@package/tasks'
-import { BaseTexture, Container, Sprite, Spritesheet, Texture } from 'pixi.js'
+import { Container, Sprite } from 'pixi.js'
 import { Chunk } from '../../../../app/main/classes/Chunk'
 import { Client } from '../Client'
-import atlas from '../../../../build/assets/spritesheets/tiles/base/atlas.json'
 
 export class Runner {
-    public async work(tasks: Task[]) {
+    public async work(tasks: Task<any>[]) {
         for (const task of tasks) {
-            const object = await task.complete()
-
-            Debug.Logger.log({
-                status: 'complete',
-                ref: task.ref
-            })
-
+            task.register(task)
+            const object = await task.render()
+            task.register(task, object)
             task.inject(object)
         }
     }
+}
 
-    public async load(chunks: Chunk[]) {
-        // for (const chunk of chunks) {
-        //     const container = new Container()
-        //     console.log(chunk.position)
-        //     container.position.x = chunk.position.x * config.baseUnit
-        //     container.position.y = chunk.position.y * config.baseUnit
-        //     for (const node of chunk.nodes.values()) {
-        //         const spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)
-        //         await spritesheet.parse()
-        //         const sprite = new Sprite(spritesheet.textures['Grass-0'])
-        //         sprite.position.x = (node.position.x * config.baseUnit)
-        //         sprite.position.y = (node.position.y * config.baseUnit)
-        //         container.addChild(sprite)
-        //     }
-        //     Client.Engine.stage.addChild(container)
-        // }
+export class Painter {
+    public async paint(chunks: Record<string, Chunk>) {
+        for (const chunk of Object.values(chunks)) {
+            const container = new Container()
+
+            for (const node of Object.values(chunk.graph.nodes)) {
+                const sprite = new Sprite(Client.Engine.atlases.spritesheets['grass'].textures['grass-0']);
+                const position = Vector2.normalize(node.position.x, node.position.y);
+                const offset = Vector2.normalize(chunk.position.x, chunk.position.y)
+                sprite.position.x = offset.x + position.x
+                sprite.position.y = offset.y + position.y
+                container.addChild(sprite)
+            }
+
+            Client.Engine.stage.container.addChild(container)
+        }
     }
 }
