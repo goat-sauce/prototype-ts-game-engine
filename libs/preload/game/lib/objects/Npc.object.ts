@@ -3,10 +3,11 @@ import { DisplayObject } from 'pixi.js'
 import { GameObject } from '../classes/GameObject'
 import { Vector2 } from '@shared/helpers'
 import { NpcState } from 'preload/game/types'
+import { GeneratedKeys } from '@preload/core'
 
 export class Npc extends GameObject<NpcState> {
     public actor: Actor = new Actor({
-        spritesheet: 'faldyr',
+        spritesheet: GeneratedKeys.Spritesheets['faldyr'],
         spawn: new Vector2(0, 4),
         static: true,
         ref: this.ref,

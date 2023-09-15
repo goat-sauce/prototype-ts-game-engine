@@ -19,6 +19,7 @@ export class Runner {
     }
 
     public async conductor(): Promise<void> {
+        console.log(Physics.interaction.values())
         for (const interaction of Physics.interaction.values()) {
             const a = interaction[0]
             const b = interaction[1]

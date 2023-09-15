@@ -11,14 +11,15 @@ import { Registry } from './members/Registry'
 import { IPC } from './members/IPC'
 import { Runner } from './members/Runner'
 import { Renderer } from './members/Renderer'
-import { KeyBinds } from 'preload/keyboard/lib/enums/KeyBinds'
 import { Queue } from './members/Queue'
+import { Scene } from 'preload/game/lib/classes/Scene'
 
 export class Engine {
     public static layers: Layers = new Layers()
     public static renderer: Renderer = new Renderer()
     public static physics: Physics = new Physics()
     public static ticker: Ticker = new Ticker()
+    public static scene: Scene = new Scene()
     public static assets: Assets = new Assets()
     public static registry: Registry = new Registry()
     public static IPC: IPC = new IPC()
@@ -64,7 +65,7 @@ export class Engine {
             Engine.runner.render([...Engine.registry.gameObjects.store.values()])
         }
 
-        if (Physics.interaction.size > 0 && [...Codes.set].includes(KeyBinds.Interact)) {
+        if (Physics.interaction.size > 0) {
             Engine.runner.conductor()
         }
     }

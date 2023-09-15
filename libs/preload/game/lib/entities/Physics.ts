@@ -1,24 +1,19 @@
-import { config } from '@shared/config'
 import { Engine } from '@preload/core'
+import { config } from '@shared/config'
 import { Vector2 } from '@shared/helpers'
 import { Body, Box } from 'p2'
 import { AnimatedSprite, Graphics, Sprite } from 'pixi.js'
-import { PhysicsOptions } from 'preload/game/types'
 import { Zone } from './Zone'
 
 export class Physics {
     public body: Body
     public box: Box
-    public sprite: Sprite | AnimatedSprite
     public graphics: Graphics = new Graphics()
-    public options: PhysicsOptions
     public zone?: Zone
 
-    public constructor(sprite: Sprite | AnimatedSprite, options: PhysicsOptions) {
-        this.sprite = sprite
-        this.options = options
-        this.body = new Body(this.options.body)
-        this.box = new Box(this.options.box)
+    public constructor(sprite: Sprite | AnimatedSprite, options: any) {
+        this.body = new Body(options.body)
+        this.box = new Box(options.box)
         this.body.addShape(this.box)
 
         if (config.debug) this.debug()

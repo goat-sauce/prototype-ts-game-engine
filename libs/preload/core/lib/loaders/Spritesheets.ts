@@ -4,7 +4,8 @@ import { Assets as AssetsPIXI, BaseTexture, Spritesheet } from 'pixi.js'
 import { Engine } from '../Engine'
 import { Errors } from '../Errors'
 import { Loader } from './abstract/Loader'
-import { AtlasJSON, Loaded } from 'preload/core/types'
+import { Loaded } from 'preload/core/types'
+import { Packer } from '@preload/core'
 
 export class Spritesheets extends Loader<Spritesheet> {
     public data: Record<string, Spritesheet> = {}
@@ -12,7 +13,7 @@ export class Spritesheets extends Loader<Spritesheet> {
     public async load(): Promise<Loaded> {
         try {
             const spritesheets = await Engine.IPC.invoke<string[]>(Channels.spritesheets.get)
-            const atlases = await Engine.IPC.invoke<Record<string, AtlasJSON>>(Channels.atlas.get)
+            const atlases = await Engine.IPC.invoke<Record<string, Packer.AtlasJSON>>(Channels.atlas.get)
 
             if (!spritesheets) throw Errors.NoSpritesheets
 

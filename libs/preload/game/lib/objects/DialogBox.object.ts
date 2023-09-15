@@ -16,10 +16,11 @@ export class DialogBox extends GameObject<DialogBoxState> {
         this.container = new Container()
 
         this.text = new Text(this.state.bag.conversation[this.state.bag.index])
+        this.text.resolution = 2
 
         this.text.style = new TextStyle({
             fontFamily: 'retro',
-            fontSize: 18,
+            fontSize: 12,
             fill: 0x000000,
             align: 'center'
         })

@@ -20,7 +20,7 @@ export class Actor {
                 mass: options.static ? 0 : 1,
                 fixedRotation: true,
                 gravityScale: 0,
-                damping: 0.9,
+                damping: 0.99,
                 position: Vector2.float32(Vector2.normalize(options.spawn))
             },
             box: {

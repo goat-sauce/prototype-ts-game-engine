@@ -19,7 +19,8 @@
             "@shared/debug": ["shared/debug"],
             "@shared/helpers": ["shared/helpers"],
             "@shared/memory": ["shared/memory"],
-            "@shared/channels": ["shared/channels"]
+            "@shared/channels": ["shared/channels"],
+            "@packer/types": ["../../../../packer/scripts/ts/types"]
         }
     }
 }

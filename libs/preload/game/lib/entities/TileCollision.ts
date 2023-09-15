@@ -1,29 +1,24 @@
 import { config } from '@shared/config'
 import { Vector2 } from '@shared/helpers'
-import { Sprite } from 'pixi.js'
-import { Collision } from 'preload/core/types'
-import { Physics } from './Physics'
+import { Tiled } from '@preload/core'
+import { Collisions } from './Collisions'
 
 export class TileCollision {
-    public physics: Physics
-    private sprite: Sprite
-    public collision: Collision
+    public physics: Collisions.Box | Collisions.Circle | Collisions.Point | Collisions.Polygon
+    public collision: Tiled.Object
     public position: Vector2
 
-    public constructor(sprite: Sprite, collision: Collision, position: Vector2) {
-        this.sprite = sprite
+    public constructor(collision: Tiled.Object, position: Vector2) {
         this.collision = collision
         this.position = this.getPosition(position)
-        this.physics = new Physics(this.sprite, {
-            body: {
-                position: Vector2.float32(this.position),
-                mass: 0
-            },
-            box: {
-                width: this.collision.width,
-                height: this.collision.height
-            }
-        })
+        this.physics = this.getPhysicsFromCollision()
+    }
+
+    public getPhysicsFromCollision(): Collisions.Box | Collisions.Circle | Collisions.Point | Collisions.Polygon {
+        if (this.collision.ellipse) return new Collisions.Circle(this.collision, this.position)
+        if (this.collision.point) return new Collisions.Point(this.collision, this.position)
+        if (this.collision.polygon) return new Collisions.Polygon(this.collision, this.position)
+        return new Collisions.Box(this.collision, this.position)
     }
 
     public getPosition(position: Vector2): Vector2 {

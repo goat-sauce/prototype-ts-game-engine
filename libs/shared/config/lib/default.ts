@@ -14,11 +14,5 @@ export const config = {
             x: 64,
             y: 64
         }
-    },
-    world: {
-        size: {
-            x: 256,
-            y: 256
-        }
     }
 }

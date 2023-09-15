@@ -3,14 +3,15 @@ import { Channels } from '@shared/channels'
 import { Engine } from '../Engine'
 import { Errors } from '../Errors'
 import { Loader } from './abstract/Loader'
-import { Loaded, TilemapJSON } from 'preload/core/types'
+import { Loaded } from 'preload/core/types'
+import { Packer } from 'preload/core'
 
-export class Tilemaps extends Loader<TilemapJSON[][]> {
-    public data: Record<string, TilemapJSON[][]> = {}
+export class Tilemaps extends Loader<Packer.TilemapJSON[][]> {
+    public data: Record<string, Packer.TilemapJSON[][]> = {}
 
     public async load(): Promise<Loaded> {
         try {
-            this.data = await Engine.IPC.invoke<Record<string, TilemapJSON[][]>>(Channels.tilemaps.get)
+            this.data = await Engine.IPC.invoke<Record<string, Packer.TilemapJSON[][]>>(Channels.tilemaps.get)
             if (!Object.keys(this.data).length) throw Errors.NoTilemaps
 
             return {

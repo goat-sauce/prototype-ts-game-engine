@@ -2,7 +2,7 @@ import { Engine } from '@preload/core'
 import { Vector2 } from '@shared/helpers'
 import { Body, Box } from 'p2'
 import { Graphics, Sprite, Spritesheet, Texture } from 'pixi.js'
-import { TilemapJSON } from 'preload/core/types'
+import { Packer } from 'preload/core'
 import { TileCollision } from './TileCollision'
 
 export class Tile {
@@ -14,7 +14,7 @@ export class Tile {
     public body: Body | null = null
     public graphics: Graphics | null = null
 
-    public constructor(tile: TilemapJSON) {
+    public constructor(tile: Packer.TilemapJSON) {
         this.spritesheet = Engine.assets.spritesheets.get(tile.spritesheet)
         this.texture = this.spritesheet.textures[tile.key]
         this.position = Vector2.normalize(new Vector2(tile.x, tile.y))
@@ -24,7 +24,7 @@ export class Tile {
 
         if (tile.collisions) {
             for (const collision of tile.collisions) {
-                new TileCollision(this.sprite, collision, this.position)
+                new TileCollision(collision, this.position)
             }
         }
     }

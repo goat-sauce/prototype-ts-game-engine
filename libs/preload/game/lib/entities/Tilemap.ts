@@ -1,10 +1,9 @@
-import { Engine } from '@preload/core'
+import { Engine, Packer } from '@preload/core'
 import { Container } from 'pixi.js'
-import { TilemapJSON } from 'preload/core/types'
 import { Tile } from './Tile'
 
 export class Tilemap {
-    public data: TilemapJSON[][] = []
+    public data: Packer.TilemapJSON[][] = []
     public container: Container = new Container()
 
     public constructor(key: string) {

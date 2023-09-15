@@ -3,14 +3,15 @@ import { Channels } from '@shared/channels'
 import { Engine } from '../Engine'
 import { Errors } from '../Errors'
 import { Loader } from './abstract/Loader'
-import { Loaded, ConversationsJSON } from 'preload/core/types'
+import { Loaded } from 'preload/core/types'
+import { Packer } from '../../index'
 
-export class Conversations extends Loader<ConversationsJSON> {
-    public data: Record<string, ConversationsJSON> = {}
+export class Conversations extends Loader<Packer.ConversationsJSON> {
+    public data: Record<string, Packer.ConversationsJSON> = {}
 
     public async load(): Promise<Loaded> {
         try {
-            this.data = await Engine.IPC.invoke<Record<string, ConversationsJSON>>(Channels.conversations.get)
+            this.data = await Engine.IPC.invoke<Record<string, Packer.ConversationsJSON>>(Channels.conversations.get)
             if (!Object.keys(this.data).length) throw Errors.NoConversations
 
             return {

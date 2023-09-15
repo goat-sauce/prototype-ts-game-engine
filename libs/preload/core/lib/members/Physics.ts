@@ -14,13 +14,9 @@ export class Physics {
     public getInteractingGameObjects(event: BeginContactEvent | EndContactEvent): InteractingGameObjects | null {
         const objectARef = Engine.registry.bodies.get(event.bodyA.id)
         const objectBRef = Engine.registry.bodies.get(event.bodyB.id)
-
-        if (objectARef && objectBRef) {
-            const objectA = Engine.registry.gameObjects.get(objectARef)
-            const objectB = Engine.registry.gameObjects.get(objectBRef)
-            if (objectA && objectB) return [objectA, objectB]
-        }
-
+        const objectA = objectARef ? Engine.registry.gameObjects.get(objectARef) : null
+        const objectB = objectBRef ? Engine.registry.gameObjects.get(objectBRef) : null
+        if (objectA && objectB) return [objectA, objectB]
         return null
     }
 
@@ -31,6 +27,7 @@ export class Physics {
     public beginContact(event: BeginContactEvent): void {
         const interactingGameObjects = this.getInteractingGameObjects(event)
         const key = this.getInteractingGameObjectsKey(event)
+        console.log(interactingGameObjects, 'setting')
         if (interactingGameObjects) Physics.interaction.set(key, interactingGameObjects)
     }
 

@@ -1,5 +1,5 @@
 import { Vector2 } from '@shared/helpers'
-import { BodyOptions, BoxOptions } from 'p2'
+import { BodyOptions, BoxOptions, CircleOptions } from 'p2'
 import { FederatedPointerEvent } from 'pixi.js'
 
 export type GameObjectOptions = {
@@ -12,13 +12,34 @@ export type ZoneOptions = {
     radius: number
 }
 
-export type PhysicsOptions = {
-    position?: Vector2
-    ref?: string
-    body: BodyOptions
-    box: BoxOptions
-    zone?: ZoneOptions
+export namespace PhysicsOptions {
+    export type Base = {
+        position: Vector2
+        ref: string
+        body: BodyOptions
+    }
+
+    export interface Box extends Base {
+        box?: BoxOptions
+    }
+
+    export interface Circle extends Base {
+        circle?: CircleOptions
+    }
+
+    export interface Zone extends Base {
+        zone?: ZoneOptions
+    }
+
+    export interface Point extends Base {
+        point?: BoxOptions
+    }
+
+    export interface Polygon extends Base { }
 }
+
+
+
 
 export type ActorOptions = {
     spritesheet: string
