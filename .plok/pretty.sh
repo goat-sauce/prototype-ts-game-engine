@@ -1,5 +1,5 @@
 main () {
-    npx prettier . $@
+    npx prettier . --write
 }
 
-main $@
+main
