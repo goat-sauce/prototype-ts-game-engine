@@ -10,7 +10,6 @@
     },
     "scripts": {
         "start": "bash .plok/start.sh",
-        "install": "bash .plok/install.sh",
         "assets": "bash .plok/assets.sh",
         "build": "bash .plok/build.sh",
         "pretty": "bash .plok/pretty.sh",
