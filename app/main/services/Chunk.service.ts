@@ -1,10 +1,9 @@
 import { config } from '@package/config'
 import { Debug } from '@package/debug'
-import { Vector2 } from '@package/entities'
+import { Chunk, Vector2 } from '@package/entities'
 import { IpcMainInvokeEvent } from 'electron'
 import { existsSync } from 'fs'
 import { readFile } from 'fs/promises'
-import { Chunk } from '../../../libs/entities/lib/Chunk'
 import { Service } from './abstract/Service'
 
 export class ChunkService extends Service {

@@ -16,7 +16,7 @@ export class GameService extends Service {
     public async create(): Promise<Load | null> {
         try {
             const world = new World()
-            const start = world.chunks[Vector2.key(config.spawn)]
+            const start = world.chunks[Vector2.key(new Vector2(config.spawn.size.x, config.spawn.size.y))]
             const chunks = await ChunkService.neighbors(start, config.distance, world.chunks)
             const save = await GameService.save(world)
             if (save.success) return { chunks }

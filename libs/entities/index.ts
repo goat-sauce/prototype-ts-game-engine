@@ -1,6 +1,6 @@
+export * from './lib/Vector2'
 export * from './lib/Actor'
 export * from './lib/Prop'
-export * from './lib/Vector2'
 export * from './lib/Chunk'
 export * from './lib/Graph'
 export * from './lib/Node'

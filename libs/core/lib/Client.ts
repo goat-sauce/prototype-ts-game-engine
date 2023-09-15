@@ -23,17 +23,17 @@ export namespace Client {
     }
 
     export class Engine {
-        public static assets: Assets = new Assets()
-        public static atlases: Atlas = new Atlas()
-        public static IPC: IPC = new IPC()
-        public static painter: Painter = new Painter()
-        public static runner: Runner = new Runner()
-        public static registry: Registry = new Registry()
-        public static stage: Stage = new Stage()
-        public static keyboard: Keyboard = new Keyboard()
         public static renderer: Renderer = new Renderer(Engine.size())
         public static ticker: Ticker = new Ticker()
+        public static stage: Stage = new Stage()
         public static memory: Memory = new Memory()
+        public static IPC: IPC = new IPC()
+        public static registry: Registry = new Registry()
+        public static assets: Assets = new Assets()
+        public static atlases: Atlas = new Atlas()
+        public static runner: Runner = new Runner()
+        public static painter: Painter = new Painter()
+        public static keyboard: Keyboard = new Keyboard()
         public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
         public static size(): Size {

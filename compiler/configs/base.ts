@@ -9,7 +9,7 @@ export const base = {
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: 'ts-loader'
+                loader: 'babel-loader'
             }
         ]
     },

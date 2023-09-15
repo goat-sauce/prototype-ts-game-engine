@@ -1,5 +1,5 @@
+import { Client } from '@package/core'
 import { AnimatedSprite, Spritesheet } from 'pixi.js'
-import { Client } from '../../core/lib/Client'
 
 export class Actor {
     public animations: Record<string, AnimatedSprite> = {}
@@ -7,6 +7,7 @@ export class Actor {
     public constructor(spritesheet: Spritesheet) {
         this.animations = this.getAnimations(spritesheet)
         Client.Engine.atlases.spritesheets.get('villager')
+
     }
 
     public getAnimations(spritesheet: Spritesheet): Record<string, AnimatedSprite> {

@@ -1,7 +1,6 @@
-import { Vector2 } from '@package/entities'
-import { Container, Sprite } from 'pixi.js'
-import { Chunk } from '../../../entities/lib/Chunk'
 import { Client } from '../Client'
+import { Chunk, Vector2 } from '@package/entities'
+import { Container, Sprite } from 'pixi.js'
 
 export class Painter {
     public async paint(chunks: Record<string, Chunk>): Promise<void> {
