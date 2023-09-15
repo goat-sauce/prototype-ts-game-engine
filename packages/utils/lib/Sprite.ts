@@ -12,8 +12,8 @@ export namespace Helper {
                 Texture.from(filename, {
                     width: options.width,
                     height: options.height,
-                    mipmap: MIPMAP_MODES.POW2,
-                }),
+                    mipmap: MIPMAP_MODES.POW2
+                })
             )
 
             sprite.anchor.x = 0.5
@@ -24,6 +24,6 @@ export namespace Helper {
             Debug.Graphics.anchor(sprite)
 
             return sprite
-        },
+        }
     }
 }

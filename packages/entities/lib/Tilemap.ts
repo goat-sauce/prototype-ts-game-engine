@@ -24,7 +24,7 @@ export class Tilemap {
             px: this.size.x / 2,
             nx: -(this.size.x / 2),
             py: this.size.y / 2,
-            ny: -(this.size.y / 2),
+            ny: -(this.size.y / 2)
         }
 
         for (let x = edges.nx; x < edges.px; x++) {

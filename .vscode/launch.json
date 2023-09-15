@@ -8,10 +8,7 @@
             "outputCapture": "std",
             "cwd": "${workspaceFolder}",
             "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
-            "args": [
-                ".",
-                "--disable-frame-rate-limit"
-            ]
+            "args": [".", "--disable-frame-rate-limit"]
         }
     ]
 }

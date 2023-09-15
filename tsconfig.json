@@ -7,33 +7,15 @@
         "inlineSourceMap": true,
         "inlineSources": true,
         "paths": {
-            "@package/core": [
-                "core/index.ts"
-            ],
-            "@package/gui": [
-                "gui/index.ts"
-            ],
-            "@package/actions": [
-                "actions/index.ts"
-            ],
-            "@package/keyboard": [
-                "keyboard/index.ts"
-            ],
-            "@package/utils": [
-                "utils/index.ts"
-            ],
-            "@package/config": [
-                "config/index.ts"
-            ],
-            "@package/memory": [
-                "memory/index.ts"
-            ],
-            "@package/entities": [
-                "entities/index.ts"
-            ],
-            "@package/debug": [
-                "debug/index.ts"
-            ]
+            "@package/core": ["core/index.ts"],
+            "@package/gui": ["gui/index.ts"],
+            "@package/actions": ["actions/index.ts"],
+            "@package/keyboard": ["keyboard/index.ts"],
+            "@package/utils": ["utils/index.ts"],
+            "@package/config": ["config/index.ts"],
+            "@package/memory": ["memory/index.ts"],
+            "@package/entities": ["entities/index.ts"],
+            "@package/debug": ["debug/index.ts"]
         }
     }
 }

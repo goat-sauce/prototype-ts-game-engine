@@ -3,13 +3,13 @@ import { ActionOptions } from 'actions/types'
 import { DisplayObject } from 'pixi.js'
 
 export abstract class Action {
-  public options: ActionOptions
+    public options: ActionOptions
 
-  constructor(options?: ActionOptions) {
-    this.options = options
-  }
+    constructor(options?: ActionOptions) {
+        this.options = options
+    }
 
-  public complete(): DisplayObject {
-    return Client.stage
-  }
+    public complete(): DisplayObject {
+        return Client.stage
+    }
 }

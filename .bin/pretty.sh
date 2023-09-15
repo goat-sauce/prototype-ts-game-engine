@@ -1,0 +1,5 @@
+main () {
+    npx prettier . $@
+}
+
+main $@
