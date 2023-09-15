@@ -30,4 +30,15 @@ export class Vector2 {
     public static key(position: Vector2): string {
         return `${position.x.toString().replace('-', 'n')}_${position.y.toString().replace('-', 'n')}`
     }
+
+    public static convert(float32: [number, number], float?: boolean): Vector2 {
+        return {
+            x: float ? float32[0] : Math.floor(float32[0]),
+            y: float ? float32[1] : Math.floor(float32[1])
+        }
+    }
+
+    public static float32(position: Vector2): [number, number] {
+        return [position.x, position.y]
+    }
 }

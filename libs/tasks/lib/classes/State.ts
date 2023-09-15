@@ -1,5 +1,5 @@
 export class State<S> {
-    public bag: S | null = null
+    public bag: S = {} as S
     public ref: string
 
     public constructor(ref: string) {

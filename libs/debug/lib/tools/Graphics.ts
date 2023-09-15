@@ -13,9 +13,10 @@ export const Graphics = {
     },
     rect: (position = new Vector2(0, 0)): GraphicsPIXI => {
         const graphics = new GraphicsPIXI()
-        graphics.beginFill(0xffff00)
-        graphics.lineStyle(10, 0xff0000)
-        graphics.drawRect(position.x, position.y, 1, 1)
+        graphics.beginFill(0xff0000)
+        // graphics.lineStyle(0, 0xff0000)
+        graphics.drawRect(position.x, position.y, 5, 5)
+        graphics.zIndex = 1000
         return graphics
     }
 }

@@ -3,7 +3,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 export const base = {
     stats: 'minimal',
     mode: process.env.MODE,
-    devtool: 'cheap-source-map',
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -14,7 +14,7 @@ export const base = {
         ]
     },
     resolve: {
-        extensions: ['.ts'],
+        extensions: ['.ts', '.js'],
         plugins: [new TsconfigPathsPlugin()]
     }
 }

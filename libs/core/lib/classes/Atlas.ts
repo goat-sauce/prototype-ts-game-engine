@@ -13,7 +13,7 @@ export class Atlas {
         try {
             const atlases = await Client.Engine.IPC.invoke<Record<string, AtlasJSON>>('atlas:get')
 
-            if (!atlases) throw Errors.NoAtlas
+            if (!Object.keys(atlases).length) throw Errors.NoAtlas
 
             for (const [key, atlas] of Object.entries(atlases)) {
                 const spritesheet = new Spritesheet(BaseTexture.from(atlas.meta.image), atlas)

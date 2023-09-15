@@ -8,6 +8,8 @@ export class Stage {
 
     public constructor() {
         this.container = new Container()
+        this.container.position = new Vector2(0, 0)
+        this.container.sortableChildren = true;
         this.pointer = this.rect()
     }
 
@@ -20,7 +22,7 @@ export class Stage {
     }
 
     public center(position: Vector2): void {
-        this.container.position.x = position.x + Client.Engine.renderer.screen.width / 2
-        this.container.position.y = position.y + Client.Engine.renderer.screen.height / 2
+        this.container.position.x = -position.x + Client.Engine.renderer.screen.width / 2
+        this.container.position.y = -position.y + Client.Engine.renderer.screen.height / 2
     }
 }

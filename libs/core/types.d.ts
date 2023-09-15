@@ -16,16 +16,24 @@ export interface AtlasJSON extends ISpritesheetData {
     }
 }
 
-type TilemapJSON = {
+export type Collision = {
+    x: number,
+    y: number,
+    width: number,
+    height: number
+}
+
+export type TilemapJSON = {
     key: string
     x: number
     y: number
+    collisions: Collision[]
 }
 
 export type Stage = Container
 
-export type RegisterTask<S extends {}> = {
-    task: Task<S>
+export type RegisterTask<T extends Task<S>, S extends {}> = {
+    task: T,
     render: DisplayObject
 }
 

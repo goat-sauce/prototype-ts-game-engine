@@ -13,6 +13,11 @@ export abstract class Task<S> {
         this.state.bag = state
     }
 
+    public async setup(state = this.state): Promise<DisplayObject> {
+        Debug.logger.log({ status: 'setup', state })
+        return new Container()
+    }
+
     public async render(state = this.state): Promise<DisplayObject> {
         Debug.logger.log({ status: 'rendered', state })
         return new Container()
@@ -24,11 +29,9 @@ export abstract class Task<S> {
 
     public register(task: Task<S>, render: DisplayObject): void {
         Client.Engine.registry.set(task.ref, { task, render })
-        Debug.logger.log({ status: 'registered', ref: this.ref, tags: this.tags })
     }
 
     public destroy(): void {
         Client.Engine.registry.delete(this.ref)
-        Debug.logger.log({ status: 'destroyed', ref: this.ref, tags: this.tags })
     }
 }

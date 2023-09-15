@@ -2,7 +2,7 @@ import { Renderer, Ticker } from 'pixi.js'
 import { Codes, Keyboard } from '@package/keyboard'
 import { Memory } from '@package/memory'
 import { Debug } from '@package/debug'
-import { Task } from '@package/tasks'
+import { Player, Task } from '@package/tasks'
 import { Runner } from './classes/Runner'
 import { Assets } from './classes/Assets'
 import { Stage } from './classes/Stage'
@@ -10,11 +10,13 @@ import { ipcRenderer } from 'electron'
 import { IPC } from './classes/IPC'
 import { Registry } from './classes/Registry'
 import { RegisterTask, Size } from 'core/types'
-import { EventHelper } from '@package/helpers'
+import { EventHelper, Vector2 } from '@package/helpers'
 import { Atlas } from './classes/Atlas'
 import { Errors } from './Errors'
 import { config } from '@package/config'
 import { Tilemaps } from './classes/Tilemaps'
+import { Physics } from './classes/Physics'
+import { PlayerState } from 'tasks/types'
 
 export namespace Client {
     export enum Mode {
@@ -28,6 +30,7 @@ export namespace Client {
 
     export class Engine {
         public static renderer: Renderer = new Renderer(Engine.size())
+        public static physics: Physics = new Physics()
         public static ticker: Ticker = new Ticker()
         public static stage: Stage = new Stage()
         public static memory: Memory = new Memory()
@@ -35,9 +38,9 @@ export namespace Client {
         public static registry: Registry = new Registry()
         public static assets: Assets = new Assets()
         public static atlases: Atlas = new Atlas()
+        public static tilemaps: Tilemaps = new Tilemaps()
         public static runner: Runner = new Runner()
         public static keyboard: Keyboard = new Keyboard()
-        public static tilemaps: Tilemaps = new Tilemaps()
         public static view: HTMLCanvasElement = Engine.renderer.view as unknown as HTMLCanvasElement
 
         public static size(): Size {
@@ -75,7 +78,7 @@ export namespace Client {
 
         public static async state(event: Event): Promise<void> {
             if (EventHelper.isCustom<{ ref: string }>(event)) {
-                const registry: RegisterTask<{}> | null = Client.Engine.registry.get(event.detail.ref)
+                const registry: RegisterTask<any, any> | null = Client.Engine.registry.get(event.detail.ref)
 
                 if (registry) {
                     const rendered = await registry.task.render()
@@ -92,17 +95,29 @@ export namespace Client {
         }
 
         public static async update(): Promise<void> {
-            const tasks = Engine.memory.get<Task<unknown>[]>('tasks')
-
+            const tasks = Engine.memory.get<Task<any>[]>('tasks')
+            Engine.physics.world.step(1 / Engine.ticker.FPS, Engine.ticker.deltaMS, 10);
             Engine.renderer.render(Engine.stage.container)
 
             if (Codes.set.size > 0) {
                 Engine.keyboard.handler()
             }
 
+            if (Engine.registry.store.size > 0) {
+                Engine.runner.render([...Engine.registry.store.values()].map((registry: RegisterTask<any, any>): Task<any> => {
+                    return registry.task
+                }))
+            }
+
             if (tasks && tasks.length > 0) {
-                Engine.memory.set<Task<unknown>[]>('tasks', [])
-                Engine.runner.work(tasks)
+                Engine.memory.set<Task<any>[]>('tasks', [])
+                Engine.runner.setup(tasks)
+            }
+
+            const player = Client.Engine.registry.search<Player, PlayerState>('player')
+
+            if (player) {
+                Client.Engine.stage.center(Vector2.convert(player.task.player.body.position, true))
             }
         }
     }

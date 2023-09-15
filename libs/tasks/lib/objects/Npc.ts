@@ -5,13 +5,13 @@ import { PlayerState } from 'tasks/types'
 import { Client } from '@package/core'
 import { Vector2 } from '@package/helpers'
 
-export class Player extends Task<PlayerState> {
+export class Npc extends Task<PlayerState> {
     public tags: string[] = ['player']
     public player: Actor
 
     public constructor(state: PlayerState) {
         super(state)
-        this.player = new Actor('villager', new Vector2(0, 0))
+        this.player = new Actor('villager', new Vector2(64, 64))
         Client.Engine.stage.center(state.position)
     }
 
