@@ -13,10 +13,10 @@ export namespace Debug {
         }
     }
     export class Logger {
-        log(message?: any, ...optionalParams: any[]) {
-            console.log(message, ...optionalParams)
+        static log(message?: any, ...optionalParams: any[]) {
+            console.log(JSON.parse(JSON.stringify(message)), ...optionalParams)
         }
-        error(message?: any, ...optionalParams: any[]) {
+        static error(message?: any, ...optionalParams: any[]) {
             console.log(message, ...optionalParams)
         }
     }

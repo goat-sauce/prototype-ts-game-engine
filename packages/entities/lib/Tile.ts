@@ -2,6 +2,7 @@ import { Villager } from '@package/actions'
 import { config } from '@package/config'
 import { Client } from '@package/core'
 import { Vector2 } from '@package/utils'
+import { Chicken } from 'actions/lib/Chicken'
 import { Container, FederatedPointerEvent, MIPMAP_MODES, Sprite, Texture } from 'pixi.js'
 
 export class Node {
@@ -34,7 +35,7 @@ export class Node {
         })
 
         sprite.on('mousedown', (event: FederatedPointerEvent) => {
-            Client.queue.push(new Villager({ position: this.position, event }))
+            Client.queue.push(new Chicken({ position: this.position }))
         })
 
         return sprite

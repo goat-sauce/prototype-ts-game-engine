@@ -4,8 +4,8 @@ import { MIPMAP_MODES, Sprite, Texture } from 'pixi.js'
 export class Prop {
     public sprite: Sprite
 
-    constructor({ position }: { position: Vector2 }) {
-        const texture = Texture.from('assets/sprites/props/Stone.png', {
+    constructor({ position, filename }: { filename: string; position: Vector2 }) {
+        const texture = Texture.from(filename, {
             width: 32,
             height: 32,
             mipmap: MIPMAP_MODES.POW2
