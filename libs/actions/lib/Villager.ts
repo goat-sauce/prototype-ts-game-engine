@@ -27,11 +27,11 @@ export class Villager extends Action {
         const villager = new Actor({
             position: position,
             texture: 'assets/sprites/actors/Villager.png',
-            width: 18,
-            height: 19
+            width: 64,
+            height: 64
         })
-        villager.animation.width = 32;
-        villager.animation.height = 32;
+        villager.animation.width = 64;
+        villager.animation.height = 64;
         villager.animation.animationSpeed = 0.05;
         villager.animation.play()
         Client.actors.push(villager);

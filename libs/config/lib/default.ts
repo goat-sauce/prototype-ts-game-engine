@@ -1,7 +1,7 @@
 import { SCALE_MODES, settings } from 'pixi.js'
 
 export const config = {
-    baseUnit: 32,
+    baseUnit: 64,
     debug: false,
     renderer: () => {
         settings.SCALE_MODE = SCALE_MODES.NEAREST

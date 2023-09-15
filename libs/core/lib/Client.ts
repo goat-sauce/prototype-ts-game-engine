@@ -6,12 +6,12 @@ import { Pool } from './classes/Pool'
 import { Stage } from 'core/types'
 import { Tween } from '@tweenjs/tween.js'
 import { Actor, Prop } from '@package/entities'
+import { AssetLoader } from './classes/AssetLoader'
 
 export class Client {
     public static renderer: Renderer = new Renderer({
         width: window.innerWidth,
         height: window.innerHeight,
-        resolution: 2
     })
     public static ticker: Ticker = new Ticker()
     public static stage: Stage = new Container()
@@ -31,10 +31,7 @@ export class Client {
         document.addEventListener('keydown', Client.keyboard.add)
         document.addEventListener('keyup', Client.keyboard.remove)
         window.addEventListener('resize', Client.resize)
-        await Assets.load('assets/sprites/props/Chicken.png')
-        await Assets.load('assets/sprites/actors/Idle1.png')
-        await Assets.load('assets/sprites/actors/Idle2.png')
-        await Assets.load('assets/sprites/tiles/Grass.png')
+        await AssetLoader.load();
     }
 
     public static resize() {
@@ -50,9 +47,7 @@ export class Client {
         Client.frames++
 
         const timer = new Date(Client.timer);
-
-        const fps = Client.frames / (timer.getMinutes() * 60 + timer.getSeconds());
-        console.log(timer.getMinutes() * 60 + timer.getSeconds(), Client.frames, Math.floor(fps));
+        const fps = Math.floor(Client.frames / (timer.getMinutes() * 60 + timer.getSeconds()));
 
         if (Client.queue.length > 0) {
             Client.stagehand.work(Client.queue)

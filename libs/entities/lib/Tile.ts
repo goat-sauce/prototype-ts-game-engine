@@ -16,7 +16,7 @@ export class Node {
         this.key = key
         this.position = position
         this.tile = this.getTile(this.getTexture('assets/sprites/tiles/Grass.png'))
-        this.tileHover = this.getSprite(this.getTexture('assets/sprites/icons/Select.png'))
+        this.tileHover = this.getSprite(this.getTexture('assets/sprites/icons/Selectx2.png'))
         this.container = new Container()
         this.container.addChild(this.tile)
     }
@@ -61,8 +61,8 @@ export class Node {
 
     getTexture(filename: string) {
         return Texture.from(filename, {
-            width: 32,
-            height: 32,
+            width: 64,
+            height: 64,
             mipmap: MIPMAP_MODES.POW2
         })
     }
