@@ -1,2 +1,1 @@
-export * from './lib/Vector2'
-export * from './lib/Sprite'
+export * from './lib/JSON'

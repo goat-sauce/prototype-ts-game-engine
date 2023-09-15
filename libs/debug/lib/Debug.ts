@@ -16,8 +16,11 @@ export namespace Debug {
         static log(message?: any, ...optionalParams: any[]) {
             console.log(JSON.parse(JSON.stringify(message)), ...optionalParams)
         }
+        static warning(message?: any, ...optionalParams: any[]) {
+            console.warn(JSON.parse(JSON.stringify(message)), ...optionalParams)
+        }
         static error(message?: any, ...optionalParams: any[]) {
-            console.log(message, ...optionalParams)
+            console.error(JSON.parse(JSON.stringify(message)), ...optionalParams)
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Client } from '@package/core'
 import { Task } from '@package/tasks'
-import { Vector2 } from '@package/utils'
+import { Vector2 } from '@package/entities'
 import { Container, Graphics } from 'pixi.js'
 import { Farm } from 'tasks/lib/Farm'
 

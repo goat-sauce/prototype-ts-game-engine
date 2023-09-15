@@ -13,9 +13,6 @@ contextBridge.exposeInMainWorld('client', {
         Client.Engine.ticker.add(() => Client.Engine.update())
         Client.Engine.ticker.start()
         const test: Chunk[] = await ipcRenderer.invoke('test', { test: true })
-        console.log(true)
-        Client.Engine.state.set<Chunk[]>('chunks', test)
-
     },
     test: async () => {
         const test = await ipcRenderer.invoke('test', { test: true })

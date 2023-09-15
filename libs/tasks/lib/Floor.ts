@@ -1,4 +1,4 @@
-import { Vector2 } from '@package/utils'
+import { Vector2 } from '@package/entities'
 import { Container } from 'pixi.js'
 // import { TileMap } from 'entities'
 import { Task } from './abstract/Task'

@@ -11,7 +11,7 @@ export class Button {
 
     constructor(buttonOptions: ButtonOptions) {
         this.sprite = new Sprite(
-            Texture.from('assets/sprites/gui/button.png', {
+            Texture.from('assets/spritesheets/gui/button.png', {
                 width: 128,
                 height: 32
             })

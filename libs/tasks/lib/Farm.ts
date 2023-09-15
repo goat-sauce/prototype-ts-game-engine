@@ -1,8 +1,8 @@
-import atlas from '../../../build/assets/sprites/props/farm/atlas.json'
+import atlas from '../../../build/assets/spritesheets/props/farm/atlas.json'
 import { Prop } from 'entities'
 import { Task } from './abstract/Task'
 import { Container, Sprite, Spritesheet } from 'pixi.js'
-import { Vector2 } from '@package/utils'
+import { Vector2 } from '@package/entities'
 import { config } from '@package/config'
 
 export class Farm extends Task {
@@ -29,14 +29,14 @@ export class Farm extends Task {
             container.addChild(tile)
         }
 
-        container.position.x = config.baseUnit * position.x;
-        container.position.y = config.baseUnit * position.y;
+        container.position.x = config.baseUnit * position.x
+        container.position.y = config.baseUnit * position.y
 
-        return container;
+        return container
     }
 
     createTile(spritesheet: Spritesheet, index: number, position: Vector2) {
-        const tile = new Sprite(spritesheet.textures[`farm-${index}`]);
+        const tile = new Sprite(spritesheet.textures[`farm-${index}`])
         tile.position = new Vector2(position.x * config.baseUnit, position.y * config.baseUnit)
         return tile
     }

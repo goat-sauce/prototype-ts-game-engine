@@ -1,6 +1,6 @@
 import { Client } from '@package/core'
 import { Task } from '@package/tasks'
-import { Vector2 } from '@package/utils'
+import { Vector2 } from '@package/entities'
 import { Container, Graphics, Text } from 'pixi.js'
 import { Farm } from 'tasks/lib/Farm'
 import { Panel } from './Panel'
@@ -54,7 +54,7 @@ export class Picker {
             cell.on('click', () => {
                 this.container.destroy()
                 this.container = new Container()
-                Client.Engine.mode = Client.Mode.Placement;
+                Client.Engine.mode = Client.Mode.Placement
                 // const tasks = Client.Engine.state.get<Task[]>('tasks')
                 // tasks.push(new Farm())
             })

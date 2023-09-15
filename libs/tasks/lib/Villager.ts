@@ -1,5 +1,5 @@
-import atlas from '../../../build/assets/sprites/actors/villager/atlas.json'
-import { Vector2 } from '@package/utils'
+import atlas from '../../../build/assets/spritesheets/actors/villager/atlas.json'
+import { Vector2 } from '@package/entities'
 import { Actor } from 'entities'
 import { Task } from './abstract/Task'
 import { AnimatedSprite } from 'pixi.js'

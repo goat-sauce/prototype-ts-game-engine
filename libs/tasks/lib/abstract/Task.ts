@@ -1,9 +1,9 @@
 import { Client } from '@package/core'
 import { Container, DisplayObject } from 'pixi.js'
-import { uuid } from 'uuidv4';
+import { uuid } from 'uuidv4'
 
 export abstract class Task {
-    public ref: string = uuid();
+    public ref: string = uuid()
 
     public async complete(): Promise<DisplayObject> {
         return new Container()

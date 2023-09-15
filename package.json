@@ -14,7 +14,8 @@
         "pretty": "bash .bin/pretty.sh",
         "watch": "bash .bin/watch.sh",
         "clean": "bash .bin/clean.sh",
-        "compiler": "bash .bin/compiler.sh"
+        "compiler": "bash .bin/compiler.sh",
+        "pack": "bash .bin/pack.sh"
     },
     "devDependencies": {
         "@types/node": "^18.11.15",

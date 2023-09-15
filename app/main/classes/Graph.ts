@@ -1,4 +1,4 @@
-import { Vector2 } from '@package/utils'
+import { Vector2 } from '@package/entities'
 import { Node } from './Node'
 
 export class Chunk {
@@ -21,7 +21,7 @@ export class Chunk {
             for (let y = 0; y < this.size.y; y++) {
                 const position = new Vector2(x, y)
                 const key = this.key(position)
-                const node = new Node(key, position, 'assets/sprites/tiles/base/Grass.png')
+                const node = new Node(key, position, 'assets/spritesheets/tiles/base/Grass.png')
                 nodes.set(key, node)
             }
         }
